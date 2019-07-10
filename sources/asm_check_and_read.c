@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:57:01 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/10 16:15:17 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/10 16:49:49 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ int		check_args(int ac, char **av)
 	return (open(av[ac - 1], O_RDONLY));
 }
 
+void	lex(char *line)
+{
+	
+}
+
 void	check_and_read(int ac, char **av)
 {
 	int		fd;
@@ -33,6 +38,7 @@ void	check_and_read(int ac, char **av)
 	if ((fd = check_args(ac, av)) >= 0)
 		while (get_next_line(fd, &line) == 1)
 		{
+			lex(line);
 			ft_printf("%s", line);
 			free(line);
 		}
