@@ -6,7 +6,7 @@
 #    By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/13 14:57:26 by ibaran            #+#    #+#              #
-#    Updated: 2019/05/13 20:23:09 by ibaran           ###   ########.fr        #
+#    Updated: 2019/07/10 15:09:27 by ibaran           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,14 @@ $(OBJS_PATH)%.o: $(PRINTF_SRCS_PATH)%.c
 $(NAME): $(OBJS) $(PRINTF_OBJS)
 	@ar rc $@ $^
 	@echo "$(GREEN)[Libft Compiled]$(DEFAULT)"
+
+#clean:
+#	@/bin/rm -f $(OBJS)
+#	@echo "$(YELLOW)[Libft Objects Removed]$(DEFAULT)"
+#
+#fclean: clean
+#	@/bin/rm -f $(NAME)
+#	@echo "$(RED)[Libft Archive Removed]$(DEFAULT)"
 
 clean:
 	@/bin/rm -f $(OBJS)

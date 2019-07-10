@@ -6,7 +6,7 @@
 #    By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/10 13:28:55 by ibaran            #+#    #+#              #
-#    Updated: 2019/07/10 14:29:03 by ibaran           ###   ########.fr        #
+#    Updated: 2019/07/10 15:10:01 by ibaran           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ OBJ_PATH		:=	./objects
 SRC_ASM			:=	$(addprefix $(SRC_PATH)/, $(SRC_NAME_ASM))
 OBJ_ASM			:=	$(addprefix $(OBJ_PATH)/, $(OBJ_NAME_ASM))
 HEAD			:=	$(addprefix $(HEAD_PATH)/, $(HEAD_NAME))
-OBJ				+=	OBJ_ASM
+OBJ				+=	$(OBJ_ASM)
 
 LIBFT			:=	$(LIB_PATH)/$(LIB_NAME)
 
