@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar.h                                          :+:      :+:    :+:   */
+/*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/10 16:22:15 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/10 16:22:49 by ibaran           ###   ########.fr       */
+/*   Created: 2019/07/10 15:58:50 by ibaran            #+#    #+#             */
+/*   Updated: 2019/07/10 16:08:13 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COREWAR_H
+#ifndef ASM_H
 
-# define COREWAR_H
+# define ASM_H
 
-# include "op.h"
+/*
+** asm_helpers.c
+*/
+void			error(char code);
+
+/*
+** asm_check.c
+*/
+void			check_and_read(int ac, char **av);
+
 
 #endif

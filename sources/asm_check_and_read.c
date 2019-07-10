@@ -1,21 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   asm_check_and_read.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/10 13:41:28 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/10 15:58:39 by ibaran           ###   ########.fr       */
+/*   Created: 2019/07/10 15:57:01 by ibaran            #+#    #+#             */
+/*   Updated: 2019/07/10 16:15:17 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "corewar.h"
 #include "asm.h"
 
-int		main(int ac, char **av)
+int		check_args(int ac, char **av)
 {
-	check_and_read(ac, av);
-	return (0);
+	char	*pos;
+
+	if (ac == 1)
+		error(-1);
+	pos = ft_strstr(av[ac - 1], ".s");
+	if (!pos || ft_strcmp(pos, ".s") || pos == av[ac - 1])
+		error (-1);
+	return (open(av[ac - 1], O_RDONLY));
+}
+
+void	check_and_read(int ac, char **av)
+{
+	int		fd;
+	char	*line;
+	
+	if ((fd = check_args(ac, av)) >= 0)
+		while (get_next_line(fd, &line) == 1)
+		{
+			ft_printf("%s", line);
+			free(line);
+		}
+	else
+		error(-2);
 }

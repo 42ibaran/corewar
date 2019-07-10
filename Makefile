@@ -6,7 +6,7 @@
 #    By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/10 13:28:55 by ibaran            #+#    #+#              #
-#    Updated: 2019/07/10 15:10:01 by ibaran           ###   ########.fr        #
+#    Updated: 2019/07/10 16:19:39 by ibaran           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,12 @@ ASM				:=	asm
 VPATH			:=	./sources/ ./objects/ ./includes/
 
 SRC_NAME_ASM	:=	\
-					asm.c
+					asm.c \
+					asm_check_and_read.c \
+					asm_helpers.c
 
-HEAD_NAME		:= 	corewar.h
+HEAD_NAME_COREWAR	:= 	corewar.h
+HEAD_NAME_ASM		:=	asm.h
 LIB_NAME		:=	libft.a
 
 OBJ_NAME_ASM	:=	$(SRC_NAME_ASM:.c=.o)
@@ -37,7 +40,11 @@ OBJ_PATH		:=	./objects
 
 SRC_ASM			:=	$(addprefix $(SRC_PATH)/, $(SRC_NAME_ASM))
 OBJ_ASM			:=	$(addprefix $(OBJ_PATH)/, $(OBJ_NAME_ASM))
-HEAD			:=	$(addprefix $(HEAD_PATH)/, $(HEAD_NAME))
+
+HEAD_COREWAR	:=	$(addprefix $(HEAD_PATH)/, $(HEAD_NAME_COREWAR))
+HEAD_ASM		:=	$(addprefix $(HEAD_PATH)/, $(HEAD_NAME_ASM))
+
+HEAD			:=	$(HEAD_ASM) $(HEAD_COREWAR)
 OBJ				+=	$(OBJ_ASM)
 
 LIBFT			:=	$(LIB_PATH)/$(LIB_NAME)
@@ -53,7 +60,7 @@ DEFAULT			:=	\033[0m
 
 all: $(ASM)
 
-$(ASM): $(LIBFT) $(OBJ_ASM)
+$(ASM): $(LIBFT) $(OBJ_ASM) $(HEAD_ASM) $(HEAD_COREWAR)
 	@$(CC) $(CFLAGS) $(LIBS) $(CPPFLAGS) $(OBJ_ASM) -o $@
 	@ echo "$(GREEN)[asm Compiled]$(DEFAULT)"
 
