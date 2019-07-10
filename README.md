@@ -1,1 +1,3 @@
-# corewar
+# Corewar
+
+1. Creating assembler
