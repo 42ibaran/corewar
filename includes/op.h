@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2019/07/10 16:21:41 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/11 15:35:57 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,5 @@ typedef struct		header_s
   unsigned int		magic;
   char				    prog_name[PROG_NAME_LENGTH + 1];
   unsigned int		prog_size;
-  charcomment[COMMENT_LENGTH + 1];
+  char            comment[COMMENT_LENGTH + 1];
 }					header_t;
