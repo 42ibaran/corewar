@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:57:01 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/11 16:24:54 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/11 17:28:56 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,20 @@ void	define_and_remember(char *line, int j, int i)
 	if (line[j] == LABEL_CHAR)
 		ft_printf(" LABEL ");
 	if (line[j] == 'r')
-		ft_printf(" REGISTRY ");
+		ft_printf(" REGISTER ");
 	if (line[j] == DIRECT_CHAR)
 		ft_printf(" DIRECT ");
+	if (line[j] == SEPARATOR_CHAR)
+		ft_printf(" SEPARATOR ");
 	define_and_remember(line, j + 1, i);
 }
 
 void	lex(char *line, int i, int j)
 {
 	static char		quote = 0;
+	char			prev_quote;
 
+	prev_quote = quote;
 	if (!line[i])
 	{
 		write(1, "\n", 1);
@@ -56,19 +60,16 @@ void	lex(char *line, int i, int j)
 				|| line[i] == '\t')
 			break ;
 		if (line[i] == '"')
-		{
 			quote = (quote == 0 ? 1 : 0);
-			if (quote == 1)
-				ft_printf(" <open> ");
-			else
-				ft_printf(" <close> ");
-		}
 		write(1, &line[i], 1);
 		i++;
 	}
 	write(1, "*", 1);
-	define_and_remember(line, j, i - 1);
-	define_and_remember(line, i, i);
+	if (!quote && !prev_quote)
+	{
+		define_and_remember(line, j, i - 1);
+		define_and_remember(line, i, i);
+	}
 	if (line[i] == COMMENT_CHAR)
 	{
 		write(1, "\n", 1);
