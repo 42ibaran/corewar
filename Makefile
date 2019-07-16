@@ -6,7 +6,7 @@
 #    By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/10 13:28:55 by ibaran            #+#    #+#              #
-#    Updated: 2019/07/10 16:19:39 by ibaran           ###   ########.fr        #
+#    Updated: 2019/07/16 14:37:56 by ibaran           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ VPATH			:=	./sources/ ./objects/ ./includes/
 SRC_NAME_ASM	:=	\
 					asm.c \
 					asm_check_and_read.c \
-					asm_helpers.c
+					asm_helpers.c \
+					asm_init.c
 
 HEAD_NAME_COREWAR	:= 	corewar.h
 HEAD_NAME_ASM		:=	asm.h

@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:22:15 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/10 16:22:49 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/16 14:29:00 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 # define COREWAR_H
 
 # include "op.h"
+# include "libft.h"
 
 #endif
