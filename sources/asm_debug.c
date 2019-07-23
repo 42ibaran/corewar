@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 14:57:20 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/16 14:58:00 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/23 12:53:33 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	print_strings(t_string *string)
 		lexer = string->word;
 		while (lexer)
 		{
-			if (!lexer->is_space && !lexer->is_separator)
+			if (!lexer->is_space) //&&!lexer->is_separator)
 			{
 				ft_printf("%s ", lexer->str);
 				print_definition(lexer);
