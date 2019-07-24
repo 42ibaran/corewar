@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 14:57:20 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/23 12:53:33 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/24 12:54:01 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,46 @@
 
 void	print_strings(t_string *string)
 {
-	t_lexer		*lexer;
+	t_word		*word;
 
 	while (string)
 	{
-		lexer = string->word;
-		while (lexer)
+		ft_putnbr(string->nbr);
+		word = string->word;
+		while (word)
 		{
-			if (!lexer->is_space) //&&!lexer->is_separator)
+			if (!word->is_space) //&&!word->is_separator)
 			{
-				ft_printf("%s ", lexer->str);
-				print_definition(lexer);
+				ft_printf("%s ", word->str);
+				print_definition(word);
 			}
-			lexer = lexer->next;
+			word = word->next;
 		}
 		ft_printf("\n");
 		string = string->next;
 	}
 }
 
-void		print_definition(t_lexer *lexer)
+void		print_definition(t_word *word)
 {
-	if (!lexer)
+	if (!word)
 		return ;
-	if (lexer->is_label)
+	if (word->is_label)
 		ft_printf(" label ");
-	if (lexer->is_instruction)
+	if (word->is_instruction)
 		ft_printf(" instruction ");
-	if (lexer->is_register)
+	if (word->is_register)
 		ft_printf(" register ");
-	if (lexer->is_separator)
+	if (word->is_separator)
 		ft_printf(" separator ");
-	if (lexer->is_direct)
+	if (word->is_direct)
 		ft_printf(" direct ");
-	if (lexer->is_name)
+	if (word->is_name)
 		ft_printf(" name ");
-	if (lexer->is_comment)
+	if (word->is_comment)
 		ft_printf(" comment ");
-	if (lexer->is_command)
+	if (word->is_command)
 		ft_printf(" command ");
+	if (word->is_quote)
+		ft_printf(" quote ");
 }
