@@ -30,50 +30,25 @@ int		check_args(int ac, char **av)
 }
 
 /*
-** define() takes the part if a line and checks every character trying to give
-** a word a definition
+** define() uses functions word_is_*** trying to give a word a definition
 */
 t_word		*define(char *line, int j, int i, t_word *word, char prev_quote)
 {
-	char	is_first;
-
-	is_first = 0;
-	if (j > i)
+	word = init_word(line, j, i);
+	word_is_space(line, j, i, word, prev_quote);
+	word_is_quote(line, j, i, word, prev_quote);
+	word_is_separator(line, j, i, word, prev_quote);
+	if (!word->is_space && !word->is_quote && !word->is_separator)
 	{
-		if (word && word->is_label == 0 && word->is_register == 0
-				&& word->is_separator == 0 && word->is_direct == 0
-				&& word->is_name == 0 && word->is_comment == 0
-				&& word->is_space == 0 && word->is_command == 0
-				&& word->is_quote == 0)
-			word->is_instruction = 1;
-		if (word && (word->is_label != 0 || word->is_instruction != 0
-				|| word->is_separator != 0 || word->is_direct != 0
-				|| word->is_name != 0 || word->is_comment != 0
-				|| word->is_space != 0 || word->is_command != 0
-				|| word->is_quote != 0))
-			word->is_register = 0;
-		return (word);
+		word_is_command(line, j, i, word, prev_quote);
+		word_is_instruction(line, j, i, word, prev_quote);
+		word_is_operation(line, j, i, word, prev_quote);
+		word_is_register(line, j, i, word, prev_quote);
+		word_is_direct(line, j, i, word, prev_quote);
+		word_is_indirect(line, j, i, word, prev_quote);
+		word_is_label(line, j, i, word, prev_quote);
 	}
-	if (!word && ++is_first)
-		word = init_word(line, j, i);
-	if (line[j] == LABEL_CHAR)
-		word->is_label = 1;
-	if (line[j] == 'r' && is_first)
-		word->is_register = 1;
-	if (line[j] == '.' && is_first)
-		word->is_command = 1;
-	if (line[j] == DIRECT_CHAR)
-		word->is_direct = 1;
-	if (line[j] == SEPARATOR_CHAR)
-		word->is_separator = 1;
-	if ((line[j] == ' ' || line[j] == '\t' || line[j] == '\n') && is_first)
-		word->is_space = 1;
-	if (prev_quote)
-	{
-		word->is_quote = 1;
-		j = i;
-	}
-	return (define(line, j + 1, i, word, prev_quote));
+	return (word);
 }
 
 void	define_and_remember(char *line, int i, int j, t_string *string,
@@ -82,11 +57,14 @@ void	define_and_remember(char *line, int i, int j, t_string *string,
 	t_word		*word;
 
 	word = define(line, i, j, NULL, prev_quote);
-	if (!string->last_word)
-		string->word = word;
-	else
-		string->last_word->next = word;
-	string->last_word = word;
+	if (word && !word->is_space)
+	{
+		if (!string->last_word)
+			string->word = word;
+		else
+			string->last_word->next = word;
+		string->last_word = word;
+	}
 }
 
 void	lex(char *line, int i, int j, t_string *string)
@@ -97,7 +75,7 @@ void	lex(char *line, int i, int j, t_string *string)
 	prev_quote = quote;
 	if (!line[i])
 		return ;
-	while (line[i] && line[i] != '\n')
+	while (line[i])// && line[i] != '\n')
 	{
 		if (line[i] == '"')
 		{
@@ -105,7 +83,7 @@ void	lex(char *line, int i, int j, t_string *string)
 			break ;
 		}
 		if (!quote && (line[i] == COMMENT_CHAR || line[i] == SEPARATOR_CHAR
-				|| line[i] == ' ' || line[i] == '\t'))
+				|| line[i] == ' ' || line[i] == '\t' || line[i] == '\n'))
 			break ;
 		i++;
 	}
@@ -149,8 +127,9 @@ t_string	*read_and_save(int ac, char **av)
 			if (line[0] == '\n')
 				continue ;
 			new_string(&string, &next_string, nbr);
+			next_string->line = line;
 			lex(line, 0, 0, next_string);
-			free(line);
+			//free(line);
 		}
 		close(fd);
 	}

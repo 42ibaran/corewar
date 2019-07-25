@@ -6,7 +6,7 @@
 #    By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/10 13:28:55 by ibaran            #+#    #+#              #
-#    Updated: 2019/07/24 18:24:33 by ibaran           ###   ########.fr        #
+#    Updated: 2019/07/25 18:10:42 by ibaran           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,18 @@ VPATH				:=	./sources/ ./objects/ ./includes/
 SRC_NAME_ASM		:=	\
 						asm.c \
 						asm_read_and_save.c \
+						asm_definition.c \
 						asm_helpers.c \
 						asm_init.c \
 						asm_debug.c \
 						asm_translator.c \
 						asm_write_file.c \
 						asm_put_name.c \
-						asm_put_comment.c
+						asm_put_comment.c \
+						asm_put_code.c \
+						asm_check_operations.c \
+						asm_fill_operations.c \
+						asm_get_operation_parameters.c
 
 HEAD_NAME_COREWAR	:= 	corewar.h
 HEAD_NAME_ASM		:=	asm.h

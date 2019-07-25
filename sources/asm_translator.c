@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 13:07:54 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/25 10:16:19 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/25 18:35:16 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,6 @@
 // 	}
 // }
 
-void		code(t_champion *champ, t_string *string)
-{
-	champ = NULL;
-	string = NULL;
-}
-
 t_output	*translate(t_string *string)
 {
 	t_output	*out;
@@ -50,8 +44,6 @@ t_output	*translate(t_string *string)
 	while (string)
 	{
 		word = string->word;
-		while (word && word->is_space)
-			word = word->next;
 		//
 		if (!word)
 		{
@@ -59,18 +51,21 @@ t_output	*translate(t_string *string)
 			continue ;
 		}
 		//
-		if (!ft_strcmp(word->str, NAME_CMD_STRING))
+		if (!ft_strcmp(word->str, NAME_CMD_STRING)) // protect from duplicates
 			name(champ, string);
-		else if (!ft_strcmp(word->str, COMMENT_CMD_STRING))
+		else if (!ft_strcmp(word->str, COMMENT_CMD_STRING)) // protect from duplicates
 			comment(champ, string);
 		else if (champ->name_size != -1 && champ->comment_size != -1)
-			code(champ, string);
+		{
+			code(champ, string, NULL, NULL);
+			break ;
+		}
 		else if (word && !word->is_quote)
 			error(ERR_COMMON);
 			//translator_error(champ, string);
 		string = string->next;
 	}
-	ft_printf("%s\n", champ->name);
-	ft_printf("%s\n", champ->comment);
+	// ft_printf("%s\n", champ->name);
+	// ft_printf("%s\n", champ->comment);
 	return (out = NULL);
 }
