@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_check_and_read.c                               :+:      :+:    :+:   */
+/*   asm_read_and_save.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,6 +13,10 @@
 #include "asm.h"
 #include "corewar.h"
 
+/*
+** check_args() checks if the name of the file is given,
+** checks if the name of the file is valid and tries to open the file
+*/
 int		check_args(int ac, char **av)
 {
 	char	*pos;
@@ -25,6 +29,10 @@ int		check_args(int ac, char **av)
 	return (open(av[ac - 1], O_RDONLY));
 }
 
+/*
+** define() takes the part if a line and checks every character trying to give
+** a word a definition
+*/
 t_word		*define(char *line, int j, int i, t_word *word, char prev_quote)
 {
 	char	is_first;
@@ -126,7 +134,7 @@ void	new_string(t_string **string, t_string **next_string, int nbr)
 	}
 }
 
-t_string	*check_and_read(int ac, char **av)
+t_string	*read_and_save(int ac, char **av)
 {
 	int			fd;
 	char		*line;
@@ -144,9 +152,10 @@ t_string	*check_and_read(int ac, char **av)
 			lex(line, 0, 0, next_string);
 			free(line);
 		}
+		close(fd);
 	}
 	else
-		error(ERR_FILE);
+		error(ERR_READ);
 	print_strings(string);
 	return (string);
 }

@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   asm_write_file.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/10 13:41:28 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/24 19:38:00 by ibaran           ###   ########.fr       */
+/*   Created: 2019/07/24 15:30:38 by ibaran            #+#    #+#             */
+/*   Updated: 2019/07/24 15:51:46 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "asm.h"
 
-int		main(int ac, char **av)
+void	write_into_file(t_output *out, char *name)
 {
-	t_string	*string;
-	t_output	*output;
+	int		fd;
 
-	string = read_and_save(ac, av);
-	output = translate(string);
-	//write_into_file(output, av[ac - 1]);
-	return (0);
+	name[ft_strlen(name) - 2] = '\0';
+	if ((fd = open(name, O_CREAT | O_WRONLY, S_IRUSR | S_IWUSR)) < 0)
+		error(ERR_WRITE);
+	write(fd, out->string, out->size);
+	close(fd);
 }

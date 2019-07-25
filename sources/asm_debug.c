@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 14:57:20 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/24 12:54:01 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/25 10:08:50 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	print_strings(t_string *string)
 		word = string->word;
 		while (word)
 		{
-			if (!word->is_space) //&&!word->is_separator)
+			//if (!word->is_space) //&&!word->is_separator)
 			{
-				ft_printf("%s ", word->str);
+				ft_printf("%s", word->str);
 				print_definition(word);
 			}
 			word = word->next;
@@ -40,6 +40,8 @@ void		print_definition(t_word *word)
 		return ;
 	if (word->is_label)
 		ft_printf(" label ");
+	if (word->is_space)
+		ft_printf(" space ");
 	if (word->is_instruction)
 		ft_printf(" instruction ");
 	if (word->is_register)

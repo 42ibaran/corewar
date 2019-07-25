@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 14:28:02 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/24 13:00:10 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/24 19:32:57 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,32 @@ t_word		*init_word(char *line, int j, int i)
 	word->is_command = 0;
 	word->next = NULL;
 	return (word);
+}
+
+t_output	*init_output(void)
+{
+	t_output	*new_output;
+
+	if (!(new_output = (t_output*)malloc(sizeof(t_output))))
+		error(ERR_MEMORY);
+	if (!(new_output->string = ft_strnew(BUFF_OUT_STR - 1)))
+		error(ERR_MEMORY);
+	new_output->pos = 0;
+	new_output->size = BUFF_OUT_STR;
+	return (new_output);
+}
+
+t_champion	*init_champion(void)
+{
+	t_champion	*new_champion;
+
+	if (!(new_champion = (t_champion*)malloc(sizeof(t_champion))))
+		error(ERR_MEMORY);
+	new_champion->name[0] = '\0';
+	new_champion->name_size = -1;
+	new_champion->comment[0] = '\0';
+	new_champion->comment_size = -1;
+	new_champion->code = NULL;
+	new_champion->code_size = -1;
+	return (new_champion);
 }
