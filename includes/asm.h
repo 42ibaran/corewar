@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:58:50 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/25 19:35:54 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/26 12:22:02 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,10 @@ typedef struct				s_operation
 	char					*arg_str[3];
 	unsigned  int			arg_value[3];
 	char					arg_type[3];
+	char					arg_size[3];
 	char					arg_nbr;
 	int						length;
-	char					*binary;
+	unsigned char			*binary;
 	struct s_operation		*next;
 }							t_operation;
 
@@ -151,11 +152,11 @@ void						comment(t_champion *champ, t_string *string);
 /*
 ** asm_put_code.c
 */
-void						code(t_champion *champ, t_string *string,
+t_instruction				*prepare_operations(t_string *string,
 							t_instruction *instr, t_instruction *next_instr);
 void						fill_arg_type(t_operation *oper, t_word *word,
 							char arg_nbr);
-
+void						code(t_instruction *instr);
 /*
 ** asm_get_operation_parameters.c
 */
@@ -227,5 +228,11 @@ void						word_is_direct(char *line, int j, int i,
 							t_word *word, char prev_quote);
 void						word_is_indirect(char *line, int j, int i,
 							t_word *word, char prev_quote);
-							
+
+/*
+**
+*/
+int							get_label_distance(t_operation *oper,
+							t_instruction *instr, char *name);
+
 #endif

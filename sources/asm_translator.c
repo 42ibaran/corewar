@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 13:07:54 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/25 18:35:16 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/26 10:43:30 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_output	*translate(t_string *string)
 {
 	t_output	*out;
 	t_champion	*champ;
+	t_instruction *instr;
 	t_word		*word;
 
 	champ = init_champion();
@@ -57,7 +58,8 @@ t_output	*translate(t_string *string)
 			comment(champ, string);
 		else if (champ->name_size != -1 && champ->comment_size != -1)
 		{
-			code(champ, string, NULL, NULL);
+			instr = prepare_operations(string, NULL, NULL);
+			code(instr);
 			break ;
 		}
 		else if (word && !word->is_quote)

@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 14:28:02 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/25 18:21:12 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/26 10:59:14 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,9 @@ t_operation		*init_operation(char *name)
 	new_operation->arg_type[0] = -1;
 	new_operation->arg_type[1] = -1;
 	new_operation->arg_type[2] = -1;
+	new_operation->arg_size[0] = 0;
+	new_operation->arg_size[1] = 0;
+	new_operation->arg_size[2] = 0;
 	new_operation->length = -1;
 	new_operation->binary = NULL;
 	new_operation->next = NULL;

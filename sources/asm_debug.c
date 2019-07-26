@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 14:57:20 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/25 19:35:30 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/26 12:39:48 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void		print_definition(t_word *word)
 void		print_all_instuctions(t_instruction *instr)
 {
 	t_operation		*oper;
+	int				i;
 
 	while (instr)
 	{
@@ -74,11 +75,41 @@ void		print_all_instuctions(t_instruction *instr)
 		ft_printf("%s:\n", instr->name);
 		while (oper)
 		{
-			ft_printf("%d, arg_type_code = %#x\n", oper->oper_code, oper->arg_type_code);
+			i = -1;
+			while (++i < oper->length)
+			{
+				printf("%.2x ", oper->binary[i]);
+			}
+			printf("\n");
 			oper = oper->next;
 		}
-		ft_printf("\n");
+		printf("\n");
 		instr = instr->next;
 	}
 }
 
+
+// void		print_all_instuctions(t_instruction *instr)
+// {
+// 	t_operation		*oper;
+// 	int				i;
+
+// 	while (instr)
+// 	{
+// 		oper = instr->operation;
+// 		ft_printf("%s:\n", instr->name);
+// 		while (oper)
+// 		{
+// 			printf("%#x\n", oper->oper_code);
+// 			i = -1;
+// 			while (oper->arg_type[++i] != -1 && i < 3)
+// 			{
+// 				printf("%d %s || ", oper->arg_type[i], oper->arg_str[i]);
+// 			}
+// 			printf("\n");
+// 			oper = oper->next;
+// 		}
+// 		printf("\n");
+// 		instr = instr->next;
+// 	}
+// }
