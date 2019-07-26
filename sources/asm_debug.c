@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 14:57:20 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/26 12:39:48 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/26 13:01:59 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void		print_all_instuctions(t_instruction *instr)
 		instr = instr->next;
 	}
 }
-
 
 // void		print_all_instuctions(t_instruction *instr)
 // {

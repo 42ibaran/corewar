@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:58:50 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/26 12:58:54 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/26 13:05:01 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ typedef struct				s_champion
 }							t_champion;
 
 typedef void (*t_check_oper)(t_operation*, t_word*);
-typedef void (*t_fill_oper)(t_operation*, t_word*);
 
 /*
 ** asm_helpers.c
@@ -171,7 +170,6 @@ void						code(t_instruction *instr);
 ** asm_get_operation_parameters.c
 */
 t_check_oper				get_check_operation(char code);
-t_fill_oper					get_fill_operation(char code);
 char						get_dir_size(char code);
 char						get_is_type_code_required(char code);
 char						get_oper_code(char *name);
@@ -196,25 +194,6 @@ void						check_args_lldi(t_operation *oper, t_word *word);
 void						check_args_lfork(t_operation *oper, t_word *word);
 void						check_args_aff(t_operation *oper, t_word *word);
 
-/*
-** asm_fill_operations.c
-*/
-void						fill_live(t_operation *oper, t_word *word);
-void						fill_ld(t_operation *oper, t_word *word);
-void						fill_st(t_operation *oper, t_word *word);
-void						fill_add(t_operation *oper, t_word *word);
-void						fill_sub(t_operation *oper, t_word *word);
-void						fill_and(t_operation *oper, t_word *word);
-void						fill_or(t_operation *oper, t_word *word);
-void						fill_xor(t_operation *oper, t_word *word);
-void						fill_zjmp(t_operation *oper, t_word *word);
-void						fill_ldi(t_operation *oper, t_word *word);
-void						fill_sti(t_operation *oper, t_word *word);
-void						fill_fork(t_operation *oper, t_word *word);
-void						fill_lld(t_operation *oper, t_word *word);
-void						fill_lldi(t_operation *oper, t_word *word);
-void						fill_lfork(t_operation *oper, t_word *word);
-void						fill_aff(t_operation *oper, t_word *word);
 /*
 ** asm_definition.c
 */

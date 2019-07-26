@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 12:00:35 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/26 12:57:40 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/26 13:04:56 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,9 @@ void		fill_arg_type(t_operation *oper, t_word *word, char arg_nbr)
 void		fill_operation(t_operation *oper, t_word *word)
 {
 	t_check_oper	checking_fun;
-	t_fill_oper		filling_fun;
 	int				i;
 
 	checking_fun = get_check_operation(oper->oper_code);
-	filling_fun = get_fill_operation(oper->oper_code);
 	checking_fun(oper, word);
 	oper->length = 1;
 	i = -1;

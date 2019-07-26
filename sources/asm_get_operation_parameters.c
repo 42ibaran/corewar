@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 18:05:51 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/25 18:08:39 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/26 13:04:19 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,6 @@ t_check_oper	get_check_operation(char code)
 		&check_args_ldi, &check_args_sti, &check_args_fork,
 		&check_args_lld, &check_args_lldi, &check_args_lfork,
 		&check_args_aff
-	};
-
-	return (function[code - 1]);
-}
-
-t_fill_oper		get_fill_operation(char code)
-{
-	static t_fill_oper	function[16] = {
-		&fill_live, &fill_ld, &fill_st,
-		&fill_add, &fill_sub, &fill_and,
-		&fill_or, &fill_xor,&fill_zjmp,
-		&fill_ldi, &fill_sti, &fill_fork,
-		&fill_lld, &fill_lldi, &fill_lfork,
-		&fill_aff
 	};
 
 	return (function[code - 1]);
