@@ -6,7 +6,7 @@
 #    By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/10 13:28:55 by ibaran            #+#    #+#              #
-#    Updated: 2019/07/26 11:48:13 by ibaran           ###   ########.fr        #
+#    Updated: 2019/07/26 12:59:34 by ibaran           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC_NAME_ASM		:=	\
 						asm_helpers.c \
 						asm_init.c \
 						asm_debug.c \
+						asm_new_struct.c \
 						asm_translator.c \
 						asm_write_file.c \
 						asm_put_name.c \

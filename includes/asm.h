@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:58:50 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/26 12:22:02 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/26 12:58:54 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,16 @@ t_operation					*init_operation(char *name);
 void						print_strings(t_string *string);
 void						print_definition(t_word *word);
 void						print_all_instuctions(t_instruction *instr);
+
+/*
+**
+*/
+void						new_string(t_string **string, t_string
+							**next_string, int nbr);
+void						new_instruction(t_instruction **instr,
+							t_instruction **next_instr, char *str);
+void						new_operation(t_instruction **instr, t_instruction
+							**next_instr, char *str);
 
 /*
 ** asm_translator.c

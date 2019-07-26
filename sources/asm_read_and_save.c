@@ -98,20 +98,6 @@ void	lex(char *line, int i, int j, t_string *string)
 	lex(line, i + 1, i + 1, string);
 }
 
-void	new_string(t_string **string, t_string **next_string, int nbr)
-{
-	if (!*string)
-	{
-		*string = init_string(nbr);
-		*next_string = *string;
-	}
-	else
-	{
-		(*next_string)->next = init_string(nbr);
-		(*next_string) = (*next_string)->next;
-	}
-}
-
 t_string	*read_and_save(int ac, char **av)
 {
 	int			fd;

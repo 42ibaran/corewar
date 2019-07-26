@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 12:00:35 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/26 12:49:23 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/26 12:57:40 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,19 @@ void		fill_arg_type(t_operation *oper, t_word *word, char arg_nbr)
 	type = -1;
 	if (word->is_register)
 	{
-		type = 0;
+		oper->arg_type[(int)arg_nbr] = 0;
 		oper->arg_size[(int)arg_nbr] = 1;
 	}
 	else if (word->is_direct)
 	{
-		type = 1;
+		oper->arg_type[(int)arg_nbr] = 1;
 		oper->arg_size[(int)arg_nbr] = get_dir_size(oper->oper_code);
 	}
 	else if (word->is_indirect)
 	{
-		type = 2;
+		oper->arg_type[(int)arg_nbr] = 2;
 		oper->arg_size[(int)arg_nbr] = 2;
 	}
-	oper->arg_type[(int)arg_nbr] = type;
 }
 
 /*
@@ -82,43 +81,6 @@ void		fill_operation(t_operation *oper, t_word *word)
 	}
 	if (!(oper->binary = (unsigned char*)malloc(sizeof(unsigned char) * oper->length)))
 		error(ERR_MEMORY);
-}
-
-void	new_instruction(t_instruction **instr, t_instruction **next_instr,
-		char *str)
-{
-	if (!*instr)
-	{
-		*instr = init_instruction(str);
-		*next_instr = *instr;
-	}
-	else
-	{
-		if (!(*instr)->next && !(*instr)->name)
-			(*instr)->name = str;
-		else
-		{
-			(*next_instr)->next = init_instruction(str);
-			(*next_instr) = (*next_instr)->next;
-		}
-	}
-}
-
-void	new_operation(t_instruction **instr, t_instruction **next_instr,
-		char *str)
-{
-	if (!*instr)
-		new_instruction(instr, next_instr, NULL);
-	if (!(*next_instr)->operation)
-	{
-		(*next_instr)->operation = init_operation(str);
-		(*next_instr)->last_operation = (*next_instr)->operation;
-	}
-	else
-	{
-		(*next_instr)->last_operation->next = init_operation(str);
-		(*next_instr)->last_operation = (*next_instr)->last_operation->next;
-	}
 }
 
 t_instruction	*prepare_operations(t_string *string, t_instruction *instr,
@@ -153,7 +115,6 @@ int		put_arg_val_into_binary(t_operation *oper, int arg_val,
 	int		divider;
 
 	divider = ft_power(0x100, oper->arg_size[j] - 1);
-	ft_printf("%#x %d\n", divider, oper->arg_size[j]);
 	while (divider)
 	{
 		oper->binary[i] = arg_val / divider;
@@ -168,7 +129,7 @@ int		put_arg_val_into_binary(t_operation *oper, int arg_val,
 ** rewpair of negative arg_vals needed 
 */
 int		encode_operation(t_operation *oper, t_instruction *instr,
-			int i, int j)
+		int i, int j)
 {
 	int		arg_val;
 
@@ -177,22 +138,19 @@ int		encode_operation(t_operation *oper, t_instruction *instr,
 	else if (oper->arg_type[j] == 1)
 	{
 		if (ft_strisnum(oper->arg_str[j] + 1))
-		{
 			arg_val = ft_atoi(oper->arg_str[j] + 1);
-		}
 		else
 			arg_val = get_label_distance(oper, instr, oper->arg_str[j] + 2);
 	}
 	else
 	{
 		if (ft_strisnum(oper->arg_str[j]))
-		{
 			arg_val = ft_atoi(oper->arg_str[j]);
-		}
 		else
 			arg_val = get_label_distance(oper, instr, oper->arg_str[j] + 1);
 	}
-	ft_printf("%d ", arg_val);
+	// if (arg_val < 0)
+	// 	arg_val = invert_arg_val(arg_val);
 	return (put_arg_val_into_binary(oper, arg_val, i, j));
 }
 
@@ -211,15 +169,10 @@ void		code(t_instruction *instr)
 			i = 1;
 			j = -1;
 			oper->binary[0] = oper->oper_code;
-			if (oper->arg_type_code != -1)
-			{
+			if (oper->arg_type_code != -1 && ++i)
 				oper->binary[1] = oper->arg_type_code;
-				i++;
-			}
 			while (oper->arg_type[++j] != -1 && j < 3)
-			{
 				i = encode_operation(oper, first_instr, i, j);
-			}
 			oper = oper->next;
 		}
 		instr = instr->next;
