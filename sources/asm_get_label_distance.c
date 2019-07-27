@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 11:31:27 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/26 12:31:01 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/27 14:39:28 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ int			get_label_distance(t_operation *oper, t_instruction *instr,
 	while (instr)
 	{
 		inner_oper = instr->operation;
-		if (!ft_strncmp(instr->name, name, ft_strlen(name)))
+		if (!ft_strncmp(instr->name, name, ft_strlen(name))
+				&& !ft_strncmp(instr->name, name, ft_strlen(instr->name) - 1))
 		{
 			found_instr = instr;
 			label_or_oper = (label_or_oper == 0 ? 1 : label_or_oper);

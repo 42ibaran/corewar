@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:58:50 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/26 13:05:01 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/27 14:27:38 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,6 @@ typedef struct				s_string
 	struct s_string			*next;
 }							t_string;
 
-typedef struct				s_output
-{
-	char					*string;
-	int						pos;
-	int						size;
-}							t_output;
-
 /*
 ** arg_type:
 ** -1 = empty or error (which basically can't happen)
@@ -65,7 +58,7 @@ typedef struct				s_operation
 	char					oper_code;
 	int						arg_type_code;
 	char					*arg_str[3];
-	unsigned  int			arg_value[3];
+	unsigned int			arg_value[3];
 	char					arg_type[3];
 	char					arg_size[3];
 	char					arg_nbr;
@@ -94,13 +87,18 @@ typedef struct				s_champion
 	int						code_size;
 }							t_champion;
 
+typedef struct				s_output
+{
+	t_champion				*champ;
+	t_instruction			*instr;
+}							t_output;
+
 typedef void (*t_check_oper)(t_operation*, t_word*);
 
 /*
 ** asm_helpers.c
 */
 void						error(char code);
-t_word						*skip_space_words(t_word *word);
 
 /*
 ** asm_check.c

@@ -43,10 +43,10 @@ t_word		*define(char *line, int j, int i, t_word *word, char prev_quote)
 		word_is_command(line, j, i, word, prev_quote);
 		word_is_instruction(line, j, i, word, prev_quote);
 		word_is_operation(line, j, i, word, prev_quote);
-		word_is_register(line, j, i, word, prev_quote);
 		word_is_direct(line, j, i, word, prev_quote);
 		word_is_indirect(line, j, i, word, prev_quote);
 		word_is_label(line, j, i, word, prev_quote);
+		word_is_register(line, j, i, word, prev_quote);
 	}
 	return (word);
 }
@@ -121,6 +121,6 @@ t_string	*read_and_save(int ac, char **av)
 	}
 	else
 		error(ERR_READ);
-	print_strings(string);
+	//print_strings(string);
 	return (string);
 }

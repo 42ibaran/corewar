@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 16:16:30 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/25 17:20:39 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/27 14:22:33 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ void		word_is_register(char *line, int j, int i,
 	int		k;
 
 	(void)prev_quote;
-	if (line[j] == 'r' && !word->is_label)
+	if (line[j] == 'r' && !word->is_label && !word->is_instruction)
 	{
+		//ft_printf(">>%s\n", line + j);
 		k = i - j;
 		word->is_register = 1;
 		if (k > 2 || k == 0)

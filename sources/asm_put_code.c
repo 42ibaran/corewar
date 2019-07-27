@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 12:00:35 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/26 13:04:56 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/27 15:23:46 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,14 @@ void		fill_operation(t_operation *oper, t_word *word)
 	oper->length = 1;
 	i = -1;
 	while (++i < 3)
-	{
 		oper->length += oper->arg_size[i];
-	}
 	if (get_is_type_code_required(oper->oper_code))
 	{
 		oper->length += 1;
 		oper->arg_type_code = calculate_arg_type_code(oper);
 	}
-	if (!(oper->binary = (unsigned char*)malloc(sizeof(unsigned char) * oper->length)))
+	if (!(oper->binary =
+			(unsigned char*)malloc(sizeof(unsigned char) * oper->length)))
 		error(ERR_MEMORY);
 }
 
@@ -107,7 +106,7 @@ t_instruction	*prepare_operations(t_string *string, t_instruction *instr,
 	return (prepare_operations(string->next, instr, next_instr));
 }
 
-int		put_arg_val_into_binary(t_operation *oper, int arg_val,
+int		put_arg_val_into_binary(t_operation *oper, unsigned int arg_val,
 			int i, int j)
 {
 	int		divider;
@@ -115,12 +114,45 @@ int		put_arg_val_into_binary(t_operation *oper, int arg_val,
 	divider = ft_power(0x100, oper->arg_size[j] - 1);
 	while (divider)
 	{
-		oper->binary[i] = arg_val / divider;
-		arg_val %= 0x100;
+		oper->binary[i] = (unsigned char)(arg_val / divider);
+		arg_val %= divider;
 		divider /= 0x100;
 		i++;
 	}
 	return (i);
+}
+
+int		invert_arg_val(int val, char arg_size)
+{
+	char	*bin_str;
+	char	*bin_str_16;
+	int		i;
+
+	bin_str = ft_itoa_base(-val, 2);
+	if (!(bin_str_16 = (char*)malloc(sizeof(char) * 8 * arg_size)))
+		error(ERR_MEMORY);
+	ft_fillstr(bin_str_16, '0', 8 * arg_size);
+	ft_strcpy(bin_str_16 + (8 * arg_size - ft_strlen(bin_str)), bin_str);
+	i = -1;
+	while (++i < 8 * arg_size)
+	{
+		if (bin_str_16[i] == '0')
+			bin_str_16[i] = '1';
+		else if (bin_str_16[i] == '1')
+			bin_str_16[i] = '0';
+	}
+	while (--i > -1)
+	{
+		if (bin_str_16[i] == '0')
+		{
+			bin_str_16[i] = '1';
+			break ;
+		}
+		else
+			bin_str_16[i] = '0';
+	}
+	val = ft_atoi_base(bin_str_16, 2);
+	return (val);
 }
 
 /*
@@ -147,8 +179,8 @@ int		encode_operation(t_operation *oper, t_instruction *instr,
 		else
 			arg_val = get_label_distance(oper, instr, oper->arg_str[j] + 1);
 	}
-	// if (arg_val < 0)
-	// 	arg_val = invert_arg_val(arg_val);
+	if (arg_val < 0)
+		arg_val = invert_arg_val(arg_val, oper->arg_size[j]);
 	return (put_arg_val_into_binary(oper, arg_val, i, j));
 }
 
@@ -175,5 +207,5 @@ void		code(t_instruction *instr)
 		}
 		instr = instr->next;
 	}
-	print_all_instuctions(first_instr);
+	//print_all_instuctions(first_instr);
 }

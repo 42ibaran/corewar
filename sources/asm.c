@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:41:28 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/24 19:38:00 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/27 13:33:23 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ int		main(int ac, char **av)
 
 	string = read_and_save(ac, av);
 	output = translate(string);
-	//write_into_file(output, av[ac - 1]);
+	write_into_file(output, av[ac - 1]);
 	return (0);
 }

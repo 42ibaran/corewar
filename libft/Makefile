@@ -6,7 +6,7 @@
 #    By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/13 14:57:26 by ibaran            #+#    #+#              #
-#    Updated: 2019/07/10 15:09:27 by ibaran           ###   ########.fr        #
+#    Updated: 2019/07/27 12:56:45 by ibaran           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ ft_strsplitlst.c ft_strstr.c ft_strsub.c ft_strtrim.c ft_tolower.c \
 ft_toupper.c ft_ctoa.c ft_abs.c ft_itoa_base.c ft_strtolower.c ft_ftoa.c \
 ft_sumstrstr.c ft_min.c ft_max.c ft_nctoa.c ft_strtoupper.c ft_strndup.c \
 get_next_line.c ft_printinttab.c ft_atoi_base.c ft_strisnum.c ft_swap.c \
-ft_freewordtab.c ft_strjoinfree.c
+ft_freewordtab.c ft_strjoinfree.c ft_fillstr.c
 
 PRINTF_SRCS_PATH := ./sources/ft_printf/
 PRINTF_SRCS_NAME = \

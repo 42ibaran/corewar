@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 14:28:02 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/26 10:59:14 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/27 13:38:58 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,8 @@ t_output		*init_output(void)
 
 	if (!(new_output = (t_output*)malloc(sizeof(t_output))))
 		error(ERR_MEMORY);
-	if (!(new_output->string = ft_strnew(BUFF_OUT_STR - 1)))
-		error(ERR_MEMORY);
-	new_output->pos = 0;
-	new_output->size = BUFF_OUT_STR;
+	new_output->champ = NULL;
+	new_output->instr = NULL;
 	return (new_output);
 }
 
@@ -70,9 +68,9 @@ t_champion		*init_champion(void)
 
 	if (!(new_champion = (t_champion*)malloc(sizeof(t_champion))))
 		error(ERR_MEMORY);
-	new_champion->name[0] = '\0';
+	ft_fillstr(new_champion->name, '\0', PROG_NAME_LENGTH);
 	new_champion->name_size = -1;
-	new_champion->comment[0] = '\0';
+	ft_fillstr(new_champion->comment, '\0', COMMENT_LENGTH);
 	new_champion->comment_size = -1;
 	new_champion->code = NULL;
 	new_champion->code_size = -1;
