@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 15:30:38 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/27 15:25:41 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/27 15:56:31 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,6 @@ void	write_into_file(t_output *out, char *name)
 	zero(fd, 4);
 	exec_code(fd, out->instr);
 	close(fd);
-	ft_printf("File %s created successfully\n", name);
+	ft_printf("Writing output program to %s\n", name);
 	free(name);
 }
