@@ -112,7 +112,7 @@ t_string	*read_and_save(int ac, char **av)
 	
 	if ((fd = check_args(ac, av)) >= 0)
 	{
-		while (get_next_line(fd, &line) == 1 && ++nbr)
+		while ((ac = get_next_line(fd, &line)) == 1 && ++nbr)
 		{
 			++g_input_line;
 			if (line[0] == '\n')
@@ -124,6 +124,8 @@ t_string	*read_and_save(int ac, char **av)
 			next_string->line = line;
 			lex(line, 0, 0, next_string);
 		}
+		if (ac == -1)
+			error(ERR_READ);
 		close(fd);
 	}
 	else
