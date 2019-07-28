@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:58:50 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/28 15:29:57 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/28 16:15:22 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,6 @@ typedef struct				s_champion
 	int						name_size;
 	char					comment[COMMENT_LENGTH + 1];
 	int						comment_size;
-	char					*code;
-	int						code_size;
 }							t_champion;
 
 typedef struct				s_output
@@ -119,7 +117,7 @@ typedef struct				s_free
 	t_string				*first_string;
 	t_instruction			*first_instr;
 	t_champion				*first_champion;
-	t_output				*first_output;
+	t_output				*first_out;
 }							t_free;
 
 t_free						g_free;
@@ -155,7 +153,7 @@ void						print_definition(t_word *word);
 void						print_all_instuctions(t_instruction *instr);
 
 /*
-**
+** asm_new_struct.c
 */
 void						new_string(t_string **string, t_string
 							**next_string, int nbr);
@@ -163,6 +161,7 @@ void						new_instruction(t_instruction **instr,
 							t_instruction **next_instr, char *str);
 void						new_operation(t_instruction **instr, t_instruction
 							**next_instr, char *str);
+void						init_globals(void);
 
 /*
 ** asm_translator.c
@@ -253,5 +252,10 @@ void						word_is_indirect(char *line, int j, int i,
 */
 int							get_label_distance(t_operation *oper,
 							t_instruction *instr, char *name);
+
+/*
+** asm_free.c
+*/
+void						f_free(void);
 
 #endif

@@ -64,6 +64,11 @@ void	define_and_remember(char *line, int i, int j, t_string *string,
 			string->last_word->next = word;
 		string->last_word = word;
 	}
+	else if (word && word->is_space)
+	{
+		free(word->str);
+		free(word);
+	}
 }
 
 void	lex(char *line, int i, int j, t_string *string)
@@ -74,7 +79,7 @@ void	lex(char *line, int i, int j, t_string *string)
 	prev_quote = quote;
 	if (!line[i])
 		return ;
-	while (line[i])// && line[i] != '\n')
+	while (line[i])
 	{
 		if (line[i] == '"')
 		{
@@ -111,17 +116,18 @@ t_string	*read_and_save(int ac, char **av)
 		{
 			++g_input_line;
 			if (line[0] == '\n')
+			{
+				free(line);
 				continue ;
+			}
 			new_string(&string, &next_string, nbr);
 			next_string->line = line;
 			lex(line, 0, 0, next_string);
-			//free(line);
 		}
 		close(fd);
 	}
 	else
 		error(ERR_READ);
 	g_input_line = 0;
-	//print_strings(string);
 	return (string);
 }

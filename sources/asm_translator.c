@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 13:07:54 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/28 15:21:40 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/28 16:20:15 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,21 @@ t_output	*translate(t_string *string)
 	t_word		*word;
 
 	champ = init_champion();
+	g_free.first_champion = champ;
 	out = init_output();
+	g_free.first_out = out;
 	while (string)
 	{
 		g_input_line = string->nbr;
 		word = string->word;
-		//
 		if (!word)
 		{
 			string = string->next;
 			continue ;
 		}
-		//
-		if (!ft_strcmp(word->str, NAME_CMD_STRING)) // protect from duplicates
+		if (!ft_strcmp(word->str, NAME_CMD_STRING))
 			name(champ, string);
-		else if (!ft_strcmp(word->str, COMMENT_CMD_STRING)) // protect from duplicates
+		else if (!ft_strcmp(word->str, COMMENT_CMD_STRING))
 			comment(champ, string);
 		else if (champ->name_size != -1 && champ->comment_size != -1)
 		{
@@ -44,12 +44,10 @@ t_output	*translate(t_string *string)
 			out->instr = instr;
 			break ;
 		}
-		else// if (word && !word->is_quote)
+		else
 			lex_error(ERR_NO_NAME_OR_COMMENT, NULL);
 		string = string->next;
 	}
 	g_input_line = 0;
-	// ft_printf("%s\n", champ->name);
-	// ft_printf("%s\n", champ->comment);
 	return (out);
 }

@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 14:28:02 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/28 15:21:27 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/28 15:57:36 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ t_champion		*init_champion(void)
 	new_champion->name_size = -1;
 	ft_fillstr(new_champion->comment, '\0', COMMENT_LENGTH);
 	new_champion->comment_size = -1;
-	new_champion->code = NULL;
-	new_champion->code_size = -1;
 	return (new_champion);
 }
 

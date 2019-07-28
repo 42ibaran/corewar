@@ -6,7 +6,7 @@
 #    By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/10 13:28:55 by ibaran            #+#    #+#              #
-#    Updated: 2019/07/28 13:12:51 by ibaran           ###   ########.fr        #
+#    Updated: 2019/07/28 16:06:28 by ibaran           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ SRC_NAME_ASM		:=	\
 						asm_put_code.c \
 						asm_check_operations.c \
 						asm_get_operation_parameters.c \
-						asm_get_label_distance.c
+						asm_get_label_distance.c \
+						asm_free.c
 
 HEAD_NAME_COREWAR	:= 	corewar.h
 HEAD_NAME_ASM		:=	asm.h

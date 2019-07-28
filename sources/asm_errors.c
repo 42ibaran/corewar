@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/28 13:12:14 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/28 15:21:20 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/28 15:56:39 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ void	error(char code)
 		ft_printf("Error: Can't open/create output file\n");
 	else if (code == ERR_MAGIC)
 		ft_printf("Error: Invalid magic header\n");
-
-	//f_free();
+	f_free();
 	exit(EXIT_FAILURE);
 }
 
@@ -56,6 +55,6 @@ void	lex_error(char code, char *instr)
 		ft_printf("Error [Line %d]: name already exists\n", g_input_line);
 	else if (code == ERR_COMMENT_EXISTS)
 		ft_printf("Error [Line %d]: comment already exists\n", g_input_line);
-	//f_free();
+	f_free();
 	exit(EXIT_FAILURE);
 }

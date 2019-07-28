@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 12:00:35 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/28 15:21:32 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/28 16:13:04 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int		invert_arg_val(long long val, char arg_size)
 	int		i;
 
 	bin_str = ft_itoa_base(-val, 2);
-	if (!(bin_str_16 = (char*)malloc(sizeof(char) * 8 * arg_size)))
+	if (!(bin_str_16 = (char*)malloc(sizeof(char) * (8 * arg_size + 1))))
 		error(ERR_MEMORY);
 	ft_fillstr(bin_str_16, '0', 8 * arg_size);
 	ft_strcpy(bin_str_16 + (8 * arg_size - ft_strlen(bin_str)), bin_str);
@@ -151,6 +151,8 @@ int		invert_arg_val(long long val, char arg_size)
 			bin_str_16[i] = '0';
 	}
 	val = ft_atoi_base(bin_str_16, 2);
+	free(bin_str_16);
+	free(bin_str);
 	return (val);
 }
 
