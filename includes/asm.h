@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:58:50 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/28 16:15:22 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/28 16:39:34 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ typedef struct				s_instruction
 	t_operation				*operation;
 	t_operation				*last_operation;
 	struct s_instruction	*next;
-	//struct s_instruction	*prev;
 }							t_instruction;
 
 typedef struct				s_champion
@@ -122,7 +121,7 @@ typedef struct				s_free
 
 t_free						g_free;
 
-typedef void (*t_check_oper)(t_operation*, t_word*);
+typedef void				(*t_check_oper)(t_operation*, t_word*);
 
 /*
 ** asm_errors.c
@@ -178,13 +177,11 @@ void						write_into_file(t_output *out, char *name);
 /*
 ** asm_put_name.c
 */
-//void						name(t_output *out, t_string *string);
 void						name(t_champion *champ, t_string *string);
 
 /*
 ** asm_put_comment.c
 */
-//void						comment(t_output *out, t_string *string);
 void						comment(t_champion *champ, t_string *string);
 
 /*
@@ -248,7 +245,7 @@ void						word_is_indirect(char *line, int j, int i,
 							t_word *word, char prev_quote);
 
 /*
-**
+** asm_get_label_distance.c
 */
 int							get_label_distance(t_operation *oper,
 							t_instruction *instr, char *name);
