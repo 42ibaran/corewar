@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:58:50 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/27 14:27:38 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/28 15:29:57 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,26 @@
 # include "op.h"
 
 # define BUFF_OUT_STR 0xfff
+
+# define ERR_MEMORY 1
+# define ERR_COMMON 0
+# define ERR_USAGE -1
+# define ERR_READ -2
+# define ERR_WRITE -3
+# define ERR_MAGIC -4
+
+# define ERR_INV_REGISTER -1
+# define ERR_TOO_MANY_ARGS -2
+# define ERR_SEPARATOR -3
+# define ERR_WRONG_ARG_TYPE -4
+# define ERR_UNKNOWN_LABEL -5
+# define ERR_NO_NAME_OR_COMMENT -6
+# define ERR_NAME_EXISTS -7
+# define ERR_COMMENT_EXISTS -8
+# define ERR_NAME_TOO_LONG -9
+# define ERR_COMMENT_TOO_LONG -10
+
+int							g_input_line;
 
 typedef struct				s_word
 {
@@ -57,6 +77,7 @@ typedef struct				s_operation
 {
 	char					oper_code;
 	int						arg_type_code;
+	int						line_nbr;
 	char					*arg_str[3];
 	unsigned int			arg_value[3];
 	char					arg_type[3];
@@ -93,12 +114,23 @@ typedef struct				s_output
 	t_instruction			*instr;
 }							t_output;
 
+typedef struct				s_free
+{
+	t_string				*first_string;
+	t_instruction			*first_instr;
+	t_champion				*first_champion;
+	t_output				*first_output;
+}							t_free;
+
+t_free						g_free;
+
 typedef void (*t_check_oper)(t_operation*, t_word*);
 
 /*
-** asm_helpers.c
+** asm_errors.c
 */
 void						error(char code);
+void						lex_error(char code, char *instr);
 
 /*
 ** asm_check.c

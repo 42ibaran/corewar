@@ -6,12 +6,11 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 14:28:02 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/27 13:38:58 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/28 15:21:27 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-#include "corewar.h"
 
 t_string		*init_string(int nbr)
 {
@@ -99,6 +98,7 @@ t_operation		*init_operation(char *name)
 		error(ERR_MEMORY);
 	new_operation->oper_code = get_oper_code(name);
 	new_operation->arg_type_code = -1;
+	new_operation->line_nbr = 0;
 	new_operation->arg_value[0] = 0;
 	new_operation->arg_value[1] = 0;
 	new_operation->arg_value[2] = 0;

@@ -6,33 +6,11 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 13:07:54 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/27 13:53:54 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/28 15:21:40 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-#include "corewar.h"
-
-// void	putchar_in_out(t_output *out, char c)
-// {
-// 	out->string[out->pos] = c;
-// 	out->pos++;
-// }
-
-// void	magic(t_output *out)
-// {
-// 	unsigned int	magic_n;
-// 	unsigned int	divider;
-
-// 	divider = 0x1000000;
-// 	magic_n = COREWAR_EXEC_MAGIC;
-// 	while (divider != 0)
-// 	{
-// 		putchar_in_out(out, magic_n / divider);
-// 		magic_n %= divider;
-// 		divider /= 0x100;
-// 	}
-// }
 
 t_output	*translate(t_string *string)
 {
@@ -45,6 +23,7 @@ t_output	*translate(t_string *string)
 	out = init_output();
 	while (string)
 	{
+		g_input_line = string->nbr;
 		word = string->word;
 		//
 		if (!word)
@@ -65,11 +44,11 @@ t_output	*translate(t_string *string)
 			out->instr = instr;
 			break ;
 		}
-		else if (word && !word->is_quote)
-			error(ERR_COMMON);
-			//translator_error(champ, string);
+		else// if (word && !word->is_quote)
+			lex_error(ERR_NO_NAME_OR_COMMENT, NULL);
 		string = string->next;
 	}
+	g_input_line = 0;
 	// ft_printf("%s\n", champ->name);
 	// ft_printf("%s\n", champ->comment);
 	return (out);

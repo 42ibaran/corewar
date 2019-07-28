@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 14:57:20 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/26 13:01:59 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/28 14:53:20 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,8 @@ void	print_strings(t_string *string)
 		word = string->word;
 		while (word)
 		{
-			//if (!word->is_separator)
-			{
-				ft_printf("%s", word->str);
-				print_definition(word);
-			}
+			ft_printf("%s", word->str);
+			print_definition(word);
 			word = word->next;
 		}
 		ft_printf("\n");

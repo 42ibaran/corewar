@@ -6,12 +6,11 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 12:00:35 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/27 15:23:46 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/28 15:21:32 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-#include "corewar.h"
 
 unsigned char	calculate_arg_type_code(t_operation *oper)
 {
@@ -59,7 +58,7 @@ void		fill_arg_type(t_operation *oper, t_word *word, char arg_nbr)
 ** calculate length of opertion's code,
 ** allocate memory for it and calculate arg_type_code
 */
-void		fill_operation(t_operation *oper, t_word *word)
+void		fill_operation(t_operation *oper, t_word *word, int line_nbr)
 {
 	t_check_oper	checking_fun;
 	int				i;
@@ -75,6 +74,7 @@ void		fill_operation(t_operation *oper, t_word *word)
 		oper->length += 1;
 		oper->arg_type_code = calculate_arg_type_code(oper);
 	}
+	oper->line_nbr = line_nbr;
 	if (!(oper->binary =
 			(unsigned char*)malloc(sizeof(unsigned char) * oper->length)))
 		error(ERR_MEMORY);
@@ -84,11 +84,10 @@ t_instruction	*prepare_operations(t_string *string, t_instruction *instr,
 				t_instruction *next_instr)
 {
 	t_word			*word;
-	
+
 	if (!string)
-	{
 		return (instr);
-	}
+	g_input_line = string->nbr;
 	word = string->word;
 	if (word && word->is_instruction)
 	{
@@ -99,14 +98,14 @@ t_instruction	*prepare_operations(t_string *string, t_instruction *instr,
 	if (word && word->is_operation)
 	{
 		new_operation(&instr, &next_instr, word->str);
-		fill_operation(next_instr->last_operation, word);
+		fill_operation(next_instr->last_operation, word, string->nbr);
 		next_instr->length += (next_instr->length == -1 ? 1 : 0);
 		next_instr->length += next_instr->last_operation->length;
 	}
 	return (prepare_operations(string->next, instr, next_instr));
 }
 
-int		put_arg_val_into_binary(t_operation *oper, unsigned int arg_val,
+int		put_arg_val_into_binary(t_operation *oper, long long arg_val,
 			int i, int j)
 {
 	int		divider;
@@ -122,7 +121,7 @@ int		put_arg_val_into_binary(t_operation *oper, unsigned int arg_val,
 	return (i);
 }
 
-int		invert_arg_val(int val, char arg_size)
+int		invert_arg_val(long long val, char arg_size)
 {
 	char	*bin_str;
 	char	*bin_str_16;
@@ -155,13 +154,10 @@ int		invert_arg_val(int val, char arg_size)
 	return (val);
 }
 
-/*
-** rewpair of negative arg_vals needed 
-*/
 int		encode_operation(t_operation *oper, t_instruction *instr,
 		int i, int j)
 {
-	int		arg_val;
+	long long		arg_val;
 
 	if (oper->arg_type[j] == 0)
 		arg_val = ft_atoi(oper->arg_str[j] + 1);
@@ -196,6 +192,7 @@ void		code(t_instruction *instr)
 		oper = instr->operation;
 		while (oper)
 		{
+			g_input_line = oper->line_nbr;
 			i = 1;
 			j = -1;
 			oper->binary[0] = oper->oper_code;
@@ -207,5 +204,4 @@ void		code(t_instruction *instr)
 		}
 		instr = instr->next;
 	}
-	//print_all_instuctions(first_instr);
 }

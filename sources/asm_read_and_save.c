@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "asm.h"
-#include "corewar.h"
 
 /*
 ** check_args() checks if the name of the file is given,
@@ -22,7 +21,7 @@ int		check_args(int ac, char **av)
 	char	*pos;
 
 	if (ac == 1)
-		error(-1);
+		error(ERR_USAGE);
 	pos = ft_strstr(av[ac - 1], ".s");
 	if (!pos || ft_strcmp(pos, ".s") || pos == av[ac - 1])
 		error(ERR_USAGE);
@@ -110,6 +109,7 @@ t_string	*read_and_save(int ac, char **av)
 	{
 		while (get_next_line(fd, &line) == 1 && ++nbr)
 		{
+			++g_input_line;
 			if (line[0] == '\n')
 				continue ;
 			new_string(&string, &next_string, nbr);
@@ -121,6 +121,7 @@ t_string	*read_and_save(int ac, char **av)
 	}
 	else
 		error(ERR_READ);
+	g_input_line = 0;
 	//print_strings(string);
 	return (string);
 }

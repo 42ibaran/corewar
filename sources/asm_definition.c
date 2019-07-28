@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 16:16:30 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/27 14:22:33 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/28 15:21:17 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,14 @@ void		word_is_register(char *line, int j, int i,
 	(void)prev_quote;
 	if (line[j] == 'r' && !word->is_label && !word->is_instruction)
 	{
-		//ft_printf(">>%s\n", line + j);
 		k = i - j;
 		word->is_register = 1;
 		if (k > 2 || k == 0)
-			error(0); // invalid register number
+			lex_error(ERR_INV_REGISTER, NULL);
 		while (k > 0)
 		{
 			if ('0' > line[j + k] || line[j + k] > '9')
-				error(0); // invalid register number
+				lex_error(ERR_INV_REGISTER, NULL);
 			k--;
 		}
 	}

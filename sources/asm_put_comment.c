@@ -6,17 +6,18 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 18:22:31 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/25 10:16:58 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/28 15:21:34 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-#include "corewar.h"
 
 void	comment(t_champion *champ, t_string *string)
 {
 	t_word		*word;
 
+	if (champ->comment_size != -1)
+		lex_error(ERR_COMMENT_EXISTS, NULL);
 	while (string)
 	{
 		word = string->word;
@@ -28,11 +29,10 @@ void	comment(t_champion *champ, t_string *string)
 		}
 		if (!word)
 			return ;
-		if (champ->comment_size != -1)
-			ft_strcat(champ->comment, "\n");
-		champ->comment_size += ft_strlen(word->str) + 1;
+		champ->comment_size += (champ->comment_size == -1 ?
+				ft_strlen(word->str) + 1 : ft_strlen(word->str));
 		if (champ->comment_size > COMMENT_LENGTH)
-			error(ERR_COMMON); //change error code // comment too long
+			lex_error(ERR_COMMENT_TOO_LONG, NULL);
 		ft_strcat(champ->comment, word->str);
 		string = string->next;
 	}

@@ -6,7 +6,7 @@
 #    By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/10 13:28:55 by ibaran            #+#    #+#              #
-#    Updated: 2019/07/26 13:03:48 by ibaran           ###   ########.fr        #
+#    Updated: 2019/07/28 13:12:51 by ibaran           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC_NAME_ASM		:=	\
 						asm.c \
 						asm_read_and_save.c \
 						asm_definition.c \
-						asm_helpers.c \
+						asm_errors.c \
 						asm_init.c \
 						asm_debug.c \
 						asm_new_struct.c \

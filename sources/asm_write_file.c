@@ -6,11 +6,10 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 15:30:38 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/27 15:56:31 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/28 15:21:45 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
 #include "asm.h"
 
 void	magic(int fd)
