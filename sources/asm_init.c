@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 14:28:02 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/29 11:47:22 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/29 18:28:16 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_instruction	*init_instruction(char *name)
 
 	if (!(new_instruction = (t_instruction*)malloc(sizeof(t_instruction))))
 		error(ERR_MEMORY);
-	new_instruction->name= name;
+	new_instruction->name = name;
 	new_instruction->length = -1;
 	new_instruction->operation = NULL;
 	new_instruction->last_operation = NULL;

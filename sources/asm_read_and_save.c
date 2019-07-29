@@ -64,6 +64,8 @@ void	define_and_remember(char *line, int i, int j, t_string *string,
 {
 	t_word		*word;
 
+	if (!prev_quote && j < i)
+		return ;
 	word = define(line, i, j, prev_quote);
 	if (word && word_is_something(word))
 	{
@@ -88,11 +90,11 @@ void	divide_string_into_words(char *line, t_string *string)
 
 	while (line[i])
 	{
-		if (line[i] == COMMENT_CHAR && !quote)
+		if ((line[i] == COMMENT_CHAR || line[i] == DEF_COMMENT_CHAR)&& !quote)
 			break ;
 		else if (line[i] == '\"')
 		{
-			if (quote || j != i)
+			//if (quote)// || j != i)
 				define_and_remember(line, j, i - 1, string, quote);
 			quote = (quote == 0 ? 1 : 0);
 			i++;
@@ -102,11 +104,8 @@ void	divide_string_into_words(char *line, t_string *string)
 		else if (!quote && (line[i] == SEPARATOR_CHAR || line[i] == ' '
 				|| line[i] == '\t' || line[i] == '\n'))
 		{
-			if (i != j)
-			{
-				define_and_remember(line, j, i - 1, string, quote);
-				define_and_remember(line, i, i, string, quote);
-			}
+			define_and_remember(line, j, i - 1, string, quote);
+			define_and_remember(line, i, i, string, quote);
 			if (line[i] == '\n')
 				return ;
 			i++;

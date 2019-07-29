@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 11:31:27 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/28 15:21:23 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/29 18:37:28 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@ int			instruction_first(t_operation *oper, t_instruction *instr)
 	tmp = instr->operation;
 	while (tmp != oper)
 	{
-		dist += tmp->length;
-		tmp = tmp->next;
 		if (!tmp)
 		{
 			instr = instr->next;
 			tmp = instr->operation;
+			continue ;
 		}
+		dist += tmp->length;
+		tmp = tmp->next;
 	}
 	return (-dist);
 }
@@ -64,7 +65,7 @@ int			get_label_distance(t_operation *oper, t_instruction *instr,
 	while (instr)
 	{
 		inner_oper = instr->operation;
-		if (!ft_strncmp(instr->name, name, ft_strlen(name))
+		if (instr->name && !ft_strncmp(instr->name, name, ft_strlen(name))
 				&& !ft_strncmp(instr->name, name, ft_strlen(instr->name) - 1))
 		{
 			found_instr = instr;

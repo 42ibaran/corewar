@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 12:57:17 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/29 16:27:33 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/29 17:21:40 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,8 @@ void	new_instruction(t_instruction **instr, t_instruction **next_instr,
 	}
 	else
 	{
-		if (!(*instr)->next && !(*instr)->name)
-			(*instr)->name = str;
-		else
-		{
-			(*next_instr)->next = init_instruction(str);
-			(*next_instr) = (*next_instr)->next;
-		}
+		(*next_instr)->next = init_instruction(str);
+		(*next_instr) = (*next_instr)->next;
 	}
 }
 
