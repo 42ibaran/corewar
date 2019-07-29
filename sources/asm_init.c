@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 14:28:02 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/28 15:57:36 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/29 11:47:22 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ t_operation		*init_operation(char *name)
 
 	if (!(new_operation = (t_operation*)malloc(sizeof(t_operation))))
 		error(ERR_MEMORY);
-	new_operation->oper_code = get_oper_code(name);
+	if ((new_operation->oper_code = get_oper_code(name)) == -1)
+		lex_error(ERR_UNKMOWN_OPERATION, name);
 	new_operation->arg_type_code = -1;
 	new_operation->line_nbr = 0;
 	new_operation->arg_value[0] = 0;

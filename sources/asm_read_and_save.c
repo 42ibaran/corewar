@@ -31,8 +31,10 @@ int		check_args(int ac, char **av)
 /*
 ** define() uses functions word_is_*** trying to give a word a definition
 */
-t_word		*define(char *line, int j, int i, t_word *word, char prev_quote)
+t_word		*define(char *line, int j, int i, char prev_quote)
 {
+	t_word		*word;
+
 	word = init_word(line, j, i);
 	word_is_space(line, j, i, word, prev_quote);
 	word_is_quote(line, j, i, word, prev_quote);
@@ -42,12 +44,19 @@ t_word		*define(char *line, int j, int i, t_word *word, char prev_quote)
 		word_is_command(line, j, i, word, prev_quote);
 		word_is_instruction(line, j, i, word, prev_quote);
 		word_is_operation(line, j, i, word, prev_quote);
-		word_is_direct(line, j, i, word, prev_quote);
-		word_is_indirect(line, j, i, word, prev_quote);
 		word_is_label(line, j, i, word, prev_quote);
 		word_is_register(line, j, i, word, prev_quote);
+		word_is_direct(line, j, i, word, prev_quote);
+		word_is_indirect(line, j, i, word, prev_quote);
 	}
 	return (word);
+}
+
+char	word_is_something(t_word *word)
+{
+	return (word->is_command || word->is_instruction || word->is_operation
+		|| word->is_label || word->is_register || word->is_direct
+		||word->is_indirect || word->is_quote || word->is_separator);
 }
 
 void	define_and_remember(char *line, int i, int j, t_string *string,
@@ -55,8 +64,8 @@ void	define_and_remember(char *line, int i, int j, t_string *string,
 {
 	t_word		*word;
 
-	word = define(line, i, j, NULL, prev_quote);
-	if (word && !word->is_space)
+	word = define(line, i, j, prev_quote);
+	if (word && word_is_something(word))
 	{
 		if (!string->last_word)
 			string->word = word;
@@ -64,42 +73,50 @@ void	define_and_remember(char *line, int i, int j, t_string *string,
 			string->last_word->next = word;
 		string->last_word = word;
 	}
-	else if (word && word->is_space)
+	else if (word)
 	{
 		free(word->str);
 		free(word);
 	}
 }
 
-void	lex(char *line, int i, int j, t_string *string)
+void	divide_string_into_words(char *line, t_string *string)
 {
 	static char		quote = 0;
-	char			prev_quote;
+	int				i = 0;
+	int				j = 0;
 
-	prev_quote = quote;
-	if (!line[i])
-		return ;
 	while (line[i])
 	{
-		if (line[i] == '"')
+		if (line[i] == COMMENT_CHAR && !quote)
+			break ;
+		else if (line[i] == '\"')
 		{
+			if (quote || j != i)
+				define_and_remember(line, j, i - 1, string, quote);
 			quote = (quote == 0 ? 1 : 0);
-			break ;
+			i++;
+			j = i;
+			continue ;
 		}
-		if (!quote && (line[i] == COMMENT_CHAR || line[i] == SEPARATOR_CHAR
-				|| line[i] == ' ' || line[i] == '\t' || line[i] == '\n'))
-			break ;
+		else if (!quote && (line[i] == SEPARATOR_CHAR || line[i] == ' '
+				|| line[i] == '\t' || line[i] == '\n'))
+		{
+			if (i != j)
+			{
+				define_and_remember(line, j, i - 1, string, quote);
+				define_and_remember(line, i, i, string, quote);
+			}
+			if (line[i] == '\n')
+				return ;
+			i++;
+			j = i;
+			continue ;
+		}
 		i++;
 	}
-	if (i != j)
-	{
-		define_and_remember(line, j, i - 1, string, prev_quote);
-		if (line[i] != '\n' && !prev_quote && !quote)
-			define_and_remember(line, i, i, string, prev_quote);
-	}
-	if (line[i] == COMMENT_CHAR)
-		return ;
-	lex(line, i + 1, i + 1, string);
+	if (quote || j != i)
+		define_and_remember(line, j, i - 1, string, quote);
 }
 
 t_string	*read_and_save(int ac, char **av)
@@ -114,15 +131,10 @@ t_string	*read_and_save(int ac, char **av)
 	{
 		while ((ac = get_next_line(fd, &line)) == 1 && ++nbr)
 		{
-			++g_input_line;
-			if (line[0] == '\n')
-			{
-				free(line);
-				continue ;
-			}
+			g_input_l = nbr;
 			new_string(&string, &next_string, nbr);
 			next_string->line = line;
-			lex(line, 0, 0, next_string);
+			divide_string_into_words(line, next_string);
 		}
 		if (ac == -1)
 			error(ERR_READ);
@@ -130,6 +142,7 @@ t_string	*read_and_save(int ac, char **av)
 	}
 	else
 		error(ERR_READ);
-	g_input_line = 0;
+	//print_strings(string);
+	g_input_l = 0;
 	return (string);
 }

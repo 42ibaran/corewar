@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:58:50 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/28 16:39:34 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/29 16:27:33 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define ERR_READ -2
 # define ERR_WRITE -3
 # define ERR_MAGIC -4
+# define ERR_END -5
 
 # define ERR_INV_REGISTER -1
 # define ERR_TOO_MANY_ARGS -2
@@ -36,8 +37,11 @@
 # define ERR_COMMENT_EXISTS -8
 # define ERR_NAME_TOO_LONG -9
 # define ERR_COMMENT_TOO_LONG -10
+# define ERR_UNKMOWN_OPERATION -11
+# define ERR_UNEXPECTED_TOKEN -12
 
-int							g_input_line;
+
+int							g_input_l;
 
 typedef struct				s_word
 {
@@ -187,11 +191,16 @@ void						comment(t_champion *champ, t_string *string);
 /*
 ** asm_put_code.c
 */
+void						code(t_instruction *instr);
+
+/*
+** asm_prepare_operations.c
+*/
 t_instruction				*prepare_operations(t_string *string,
 							t_instruction *instr, t_instruction *next_instr);
 void						fill_arg_type(t_operation *oper, t_word *word,
 							char arg_nbr);
-void						code(t_instruction *instr);
+
 /*
 ** asm_get_operation_parameters.c
 */

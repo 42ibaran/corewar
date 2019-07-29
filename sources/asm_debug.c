@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 14:57:20 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/28 14:53:20 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/29 12:13:49 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,28 +84,3 @@ void		print_all_instuctions(t_instruction *instr)
 		instr = instr->next;
 	}
 }
-
-// void		print_all_instuctions(t_instruction *instr)
-// {
-// 	t_operation		*oper;
-// 	int				i;
-
-// 	while (instr)
-// 	{
-// 		oper = instr->operation;
-// 		ft_printf("%s:\n", instr->name);
-// 		while (oper)
-// 		{
-// 			printf("%#x\n", oper->oper_code);
-// 			i = -1;
-// 			while (oper->arg_type[++i] != -1 && i < 3)
-// 			{
-// 				printf("%d %s || ", oper->arg_type[i], oper->arg_str[i]);
-// 			}
-// 			printf("\n");
-// 			oper = oper->next;
-// 		}
-// 		printf("\n");
-// 		instr = instr->next;
-// 	}
-// }

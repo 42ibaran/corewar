@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 15:30:38 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/28 16:14:51 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/29 14:22:17 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,11 @@ void	write_into_file(t_output *out, char *name)
 {
 	int		fd;
 
+	if (!out->instr)
+		error(ERR_END);
 	name[ft_strlen(name) - 2] = '\0';
 	name = ft_strjoin(name, ".cor");
-	if ((fd = open(name, O_CREAT | O_WRONLY, S_IRUSR | S_IWUSR)) < 0)
+	if ((fd = open(name, O_TRUNC | O_CREAT | O_WRONLY, S_IRUSR | S_IWUSR)) < 0)
 		error(ERR_WRITE);
 	magic(fd);
 	write(fd, out->champ->name, PROG_NAME_LENGTH);

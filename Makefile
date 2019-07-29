@@ -6,7 +6,7 @@
 #    By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/10 13:28:55 by ibaran            #+#    #+#              #
-#    Updated: 2019/07/28 16:06:28 by ibaran           ###   ########.fr        #
+#    Updated: 2019/07/29 12:10:58 by ibaran           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,13 +26,13 @@ SRC_NAME_ASM		:=	\
 						asm_write_file.c \
 						asm_put_name.c \
 						asm_put_comment.c \
+						asm_prepare_operations.c \
 						asm_put_code.c \
 						asm_check_operations.c \
 						asm_get_operation_parameters.c \
 						asm_get_label_distance.c \
 						asm_free.c
 
-HEAD_NAME_COREWAR	:= 	corewar.h
 HEAD_NAME_ASM		:=	asm.h
 HEAD_NAME_COMMON	:=	op.h
 LIB_NAME			:=	libft.a
@@ -58,7 +58,7 @@ OBJ_ASM				:=	$(addprefix $(OBJ_PATH)/, $(OBJ_NAME_ASM))
 HEAD_COREWAR		:=	$(addprefix $(HEAD_PATH)/, $(HEAD_NAME_COREWAR))
 HEAD_ASM			:=	$(addprefix $(HEAD_PATH)/, $(HEAD_NAME_ASM))
 
-HEAD				:=	$(HEAD_ASM) $(HEAD_COREWAR) $(HEAD_NAME_COMMON)
+HEAD				:=	$(HEAD_ASM) $(HEAD_NAME_COMMON)
 OBJ					+=	$(OBJ_ASM)
 
 LIBFT				:=	$(LIB_PATH)/$(LIB_NAME)
