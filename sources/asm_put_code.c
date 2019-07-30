@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 12:00:35 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/29 17:31:14 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/30 12:42:22 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		put_arg_val_into_binary(t_operation *oper, long long arg_val,
 	return (i);
 }
 
-unsigned int		invert_arg_val(long long val, char arg_size)
+unsigned int		invert_arg_val(int val, char arg_size)
 {
 	char	*bin_str;
 	char	*bin_str_16;

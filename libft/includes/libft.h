@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 19:42:11 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/27 12:56:34 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/30 12:11:16 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char				*ft_strstr(const char *str1, const char *str2);
 char				*ft_strnstr(const char *str1, const char *str2, size_t len);
 int					ft_strcmp(const char *ptr1, const char *ptr2);
 int					ft_strncmp(const char *ptr1, const char *ptr2, size_t n);
-long long			ft_atoi(const char *str);
+int					ft_atoi(const char *str);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
 int					ft_isprint(int c);
