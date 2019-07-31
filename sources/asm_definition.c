@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 16:16:30 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/29 18:49:15 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/31 16:49:16 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void		word_is_instruction(char *line, int j, int i,
 void		word_is_operation(char *line, int j, int i,
 			t_word *word, char prev_quote)
 {
+	int				k;
 	static char		table[16][6] = {
 		"live", "ld", "st", "add", "sub", "and", "or", "xor",
 		"zjmp", "ldi", "sti", "fork", "lld", "lldi", "lfork", "aff"
 	};
-	int				k;
 
 	(void)prev_quote;
 	if (word->is_instruction)
