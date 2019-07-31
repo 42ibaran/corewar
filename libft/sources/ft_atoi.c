@@ -6,15 +6,15 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 17:07:23 by ibaran            #+#    #+#             */
-/*   Updated: 2019/05/12 17:29:36 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/30 12:11:52 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 
-long long		ft_atoi(const char *str)
+int		ft_atoi(const char *str)
 {
-	long long		to_return;
+	int				to_return;
 	int				sign;
 	char			*pointer;
 

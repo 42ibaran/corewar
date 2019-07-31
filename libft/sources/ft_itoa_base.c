@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibaran <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 14:48:21 by ibaran            #+#    #+#             */
-/*   Updated: 2019/03/04 17:33:43 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/31 11:52:27 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libc.h>
 #include "libft.h"
 
-static int		ft_exp(unsigned long long nbr, unsigned short base)
+static int		ft_exp(__int128_t nbr, unsigned short base)
 {
 	if (nbr != 0)
 		return (ft_exp(nbr / base, base) + 1);
 	return (0);
 }
 
-char			*ft_itoa_base(unsigned long long nbr, unsigned short base)
+char			*ft_itoa_base(__int128_t nbr, unsigned short base)
 {
 	int		exp;
 	char	*out;

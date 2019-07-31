@@ -6,7 +6,7 @@
 #    By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/10 13:28:55 by ibaran            #+#    #+#              #
-#    Updated: 2019/07/29 12:10:58 by ibaran           ###   ########.fr        #
+#    Updated: 2019/07/31 14:02:42 by ibaran           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC_NAME_ASM		:=	\
 						asm_put_comment.c \
 						asm_prepare_operations.c \
 						asm_put_code.c \
+						asm_process_negative_arg_val.c \
 						asm_check_operations.c \
 						asm_get_operation_parameters.c \
 						asm_get_label_distance.c \

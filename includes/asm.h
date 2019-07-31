@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:58:50 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/29 16:27:33 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/31 14:08:58 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@
 # define ERR_COMMENT_TOO_LONG -10
 # define ERR_UNKMOWN_OPERATION -11
 # define ERR_UNEXPECTED_TOKEN -12
+
+# define MAX_ARG_VAL 0xffffffffffffffff
 
 
 int							g_input_l;
@@ -258,6 +260,11 @@ void						word_is_indirect(char *line, int j, int i,
 */
 int							get_label_distance(t_operation *oper,
 							t_instruction *instr, char *name);
+
+/*
+** asm_process_negative_arg_val.c
+*/
+int							process_negative_val(__int128_t val, char arg_size);
 
 /*
 ** asm_free.c

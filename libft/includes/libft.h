@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 19:42:11 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/30 12:11:16 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/31 14:01:54 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_list				*ft_lstfold(t_list *first, t_list *(*f)(t_list*, t_list*));
 char				*ft_ctoa(char c);
 char				*ft_nctoa(char c, size_t n);
 long long			ft_abs(long long a);
-char				*ft_itoa_base(unsigned long long nbr, unsigned short base);
+char				*ft_itoa_base(__int128_t nbr, unsigned short base);
 char				*ft_strtolower(char *s);
 char				*ft_strtoupper(char *s);
 char				*ft_ftoa(long double nbr, int precision);
@@ -110,6 +110,7 @@ void				ft_swap(long long *a, long long *b);
 void				ft_freewordtab(char **pointer);
 char				*ft_strjoinfree(char *s1, char *s2, int n);
 void				ft_fillstr(char *str, char c, size_t n);
+__int128_t			ft_atoint128(const char *str);
 
 int					ft_printf(const char *format, ...);
 int					get_next_line(const int fd, char **line);
