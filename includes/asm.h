@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:58:50 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/31 14:08:58 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/31 16:27:08 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 
 # include "libft.h"
 # include "op.h"
-
-# define BUFF_OUT_STR 0xfff
 
 # define ERR_MEMORY 1
 # define ERR_COMMON 0
@@ -39,9 +37,9 @@
 # define ERR_COMMENT_TOO_LONG -10
 # define ERR_UNKMOWN_OPERATION -11
 # define ERR_UNEXPECTED_TOKEN -12
+# define ERR_INVALID_ARG -13
 
-# define MAX_ARG_VAL 0xffffffffffffffff
-
+# define MAX_ARG_VAL_ABS 0xffffff0000000000
 
 int							g_input_l;
 
@@ -272,3 +270,4 @@ int							process_negative_val(__int128_t val, char arg_size);
 void						f_free(void);
 
 #endif
+

@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 12:00:35 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/31 14:08:35 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/31 16:27:07 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int		put_arg_val_into_binary(t_operation *oper, unsigned int arg_val,
 static int		encode_operation(t_operation *oper, t_instruction *instr,
 		int i, int j)
 {
-	__int128_t		arg_val;
+	__int128_t		arg_val = 0;
 	char			numcheck;
 	int				atoi_shift;
 
@@ -41,14 +41,17 @@ static int		encode_operation(t_operation *oper, t_instruction *instr,
 		arg_val = ft_atoint128(oper->arg_str[j] + atoi_shift);
 	else if (numcheck == -1)
 		arg_val = ((oper->arg_str[j][atoi_shift] == '-') ? 0x0 : 0xffffffff);
-	else
+	else if (oper->arg_str[j][atoi_shift] == ':')
 		arg_val =
 			get_label_distance(oper, instr, oper->arg_str[j] + 1 + atoi_shift);
-	if (arg_val < 0)
-		arg_val = process_negative_val(arg_val, oper->arg_size[j]);
-	//else if (arg_val > MAX_ARG_VAL(oper->arg_size[j]))
-	else if (arg_val > MAX_ARG_VAL)
+	else
+		lex_error(ERR_INVALID_ARG, oper->arg_str[j]);
+	if (arg_val > 0 && arg_val > MAX_ARG_VAL_ABS)
 		arg_val = 0xffffffff;
+	else if (arg_val < 0 && -arg_val > MAX_ARG_VAL_ABS)
+		arg_val = 0x0;
+	else if (arg_val < 0)
+		arg_val = process_negative_val(arg_val, oper->arg_size[j]);
 	return (put_arg_val_into_binary(oper, arg_val, i, j));
 }
 

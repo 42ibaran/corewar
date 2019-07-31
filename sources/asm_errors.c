@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/28 13:12:14 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/29 16:51:34 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/31 14:18:36 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ void	lex_error(char code, char *instr)
 			g_input_l, instr);
 	else if (code == ERR_UNKNOWN_LABEL)
 		ft_printf("Error [Line %d]: unknown label '%s'\n",
+			g_input_l, instr);
+	else if (code == ERR_INVALID_ARG)
+		ft_printf("Error [Line %d]: invalid argument '%s'\n",
 			g_input_l, instr);
 	else if (code == ERR_INV_REGISTER)
 		ft_printf("Error [Line %d]: wrong register\n", g_input_l);

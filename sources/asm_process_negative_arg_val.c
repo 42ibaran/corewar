@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 13:59:20 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/31 14:05:10 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/07/31 14:56:48 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int				process_negative_val(__int128_t val, char arg_size)
 
 	bin_str = ft_itoa_base(-val, 2);
 	if ((int)ft_strlen(bin_str) > 8 * arg_size)
-		return (0);
+		return (val);
 	if (!(bin_str_16 = (char*)malloc(sizeof(char) * (8 * arg_size + 1))))
 		error(ERR_MEMORY);
 	ft_fillstr(bin_str_16, '0', 8 * arg_size);
