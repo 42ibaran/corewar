@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:58:50 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/01 16:25:50 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/01 16:56:18 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 # define ERR_INV_REGISTER -1
 # define ERR_TOO_MANY_ARGS -2
-# define ERR_SEPARATOR -3
+# define ERR_NOT_ENOUGH_ARGS -3
 # define ERR_WRONG_ARG_TYPE -4
 # define ERR_UNKNOWN_LABEL -5
 # define ERR_NO_NAME_OR_COMMENT -6
@@ -38,7 +38,7 @@
 # define ERR_UNKMOWN_OPERATION -11
 # define ERR_UNEXPECTED_TOKEN -12
 # define ERR_INVALID_ARG -13
-# define ERR_NOT_ENOUGH_ARGS -14
+# define ERR_SEPARATOR -14
 
 # define MAX_ARG_VAL_ABS 0xffffff0000000000
 
@@ -78,6 +78,7 @@ typedef struct				s_string
 ** 1 = direct
 ** 2 = indirect
 */
+
 typedef struct				s_operation
 {
 	char					oper_code;
