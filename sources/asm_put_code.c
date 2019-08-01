@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 12:00:35 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/01 12:46:12 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/01 18:16:22 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ static int		encode_operation(t_operation *oper, t_instruction *instr,
 		arg_val = process_negative_val(arg_val, oper->arg_size[j]);
 	return (put_arg_val_into_binary(oper, arg_val, i, j));
 }
+
+/*
+** code() processes each operation and translates
+** their argument from string into hex
+*/
 
 void			code(t_instruction *instr)
 {

@@ -1,16 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_check_operations_6.c                           :+:      :+:    :+:   */
+/*   asm_check_arg.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 14:31:39 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/01 14:55:22 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/01 18:03:47 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+/*
+** check_arg() takes a word and an array of function pointers that was created
+** by get_f_arr() and checks if an argument is a register, direct or indirect
+** depending on intruction and allowed types of argument
+*/
 
 void	check_arg(t_word **word, t_check_arg *f, char *oper)
 {
@@ -39,6 +45,10 @@ void	check_arg(t_word **word, t_check_arg *f, char *oper)
 	free(rem_f);
 }
 
+/*
+** check_sep() checks if a word is separator located in the right position
+*/
+
 void	check_sep(t_word **word, char *oper)
 {
 	*word = (*word)->next;
@@ -46,6 +56,10 @@ void	check_sep(t_word **word, char *oper)
 		lex_error(ERR_SEPARATOR, oper);
 }
 
+/*
+** check_null() checks if a word is null which means that there're no extra
+** arguments
+*/
 void	check_null(t_word **word, char *oper)
 {
 	*word = (*word)->next;

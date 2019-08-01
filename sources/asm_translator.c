@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 13:07:54 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/01 13:11:09 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/01 18:26:19 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ char		is_good_to_code(t_output *out, t_word *word)
 	return (out->champ->name_size != -1 && out->champ->comment_size != -1
 		&& !word->is_quote);
 }
+
+/*
+** translate() first looks for name and/or comment and then reads the asm code
+*/
 
 t_output	*translate(t_string *string)
 {

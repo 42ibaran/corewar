@@ -6,11 +6,61 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 11:31:27 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/01 12:42:49 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/01 18:12:57 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+/*
+** step number 1
+*/
+
+t_instruction	*get_instr(t_instruction *first, char *name)
+{
+	while (first)
+	{
+		if (first->name && !ft_strncmp(first->name, name, ft_strlen(name))
+				&& !ft_strncmp(first->name, name, ft_strlen(first->name) - 1))
+			return (first);
+		first = first->next;
+	}
+	return (first);
+}
+
+/*
+** step number 2
+*/
+
+int				get_prev_instr(t_instruction *first, t_operation *oper,
+				t_instruction *found, t_instruction **prev_instr)
+{
+	t_operation		*inner_oper;
+	int				label_or_oper;
+
+	label_or_oper = 0;
+	while (first)
+	{
+		inner_oper = first->operation;
+		if (first == found)
+			label_or_oper = 1;
+		while (inner_oper)
+		{
+			if (inner_oper == oper)
+			{
+				*prev_instr = first;
+				return (label_or_oper == 0 ? 2 : label_or_oper);
+			}
+			inner_oper = inner_oper->next;
+		}
+		first = first->next;
+	}
+	return (-1);
+}
+
+/*
+** step number 4
+*/
 
 int				instruction_first(t_operation *oper, t_instruction *instr)
 {
@@ -55,44 +105,15 @@ int				operation_first(t_operation *oper, t_instruction *instr,
 	return (dist);
 }
 
-t_instruction	*get_instr(t_instruction *first, char *name)
-{
-	while (first)
-	{
-		if (first->name && !ft_strncmp(first->name, name, ft_strlen(name))
-				&& !ft_strncmp(first->name, name, ft_strlen(first->name) - 1))
-			return (first);
-		first = first->next;
-	}
-	return (first);
-}
-
-int				get_prev_instr(t_instruction *first, t_operation *oper,
-				t_instruction *found, t_instruction **prev_instr)
-{
-	t_operation		*inner_oper;
-	int				label_or_oper;
-
-	label_or_oper = 0;
-	while (first)
-	{
-		inner_oper = first->operation;
-		if (first == found)
-			label_or_oper = 1;
-		while (inner_oper)
-		{
-			if (inner_oper == oper)
-			{
-				*prev_instr = first;
-				return (label_or_oper == 0 ? 2 : label_or_oper);
-			}
-			inner_oper = inner_oper->next;
-		}
-		first = first->next;
-	}
-	return (-1);
-}
-
+/*
+** algorith of get_label_distance() is as follows:
+** 1. get the pointer of the instruction mentioned as direct/indirect
+** 2.a. get the pointer of the instruction that contains the operation
+**      that uses label as an argument
+** 2.b. figure out which comes first: instrucion or operation
+** 3. check if label was found in the list of instructions
+** 4. calculate distance depending on label_or_oper value
+*/
 int				get_label_distance(t_operation *oper, t_instruction *instr,
 				char *name)
 {

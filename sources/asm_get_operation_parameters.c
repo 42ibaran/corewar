@@ -6,11 +6,16 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 18:05:51 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/01 12:03:58 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/01 18:13:56 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+/*
+** get_check_operation() returns the pointer to the function
+** that is used to check parameters of a certain operation
+*/
 
 t_check_oper	get_check_operation(char code)
 {

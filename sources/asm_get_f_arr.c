@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_check_operations_7.c                           :+:      :+:    :+:   */
+/*   asm_get_f_arr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 14:31:39 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/01 14:55:29 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/01 18:05:40 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
 /*
+** get_f_arr() returns an array of poiners to functions:
+** w_is_reg(), w_is_dir(), w_is_indir() which is later used by
+** check_arg()
+**
 ** code meaning:
 ** 0 = NULL
 ** 1 = register

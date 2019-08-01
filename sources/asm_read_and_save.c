@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:57:01 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/01 16:23:36 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/01 18:24:32 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ char		is_end_of_word(char *line, char quote, int i)
 }
 
 /*
-** the creator is really sorry for sending j as a parameter (blame the norm)
+** divide_string_into_words() takes line and divides it into sub-lines
+** with separtors, spaces and quotes. it stops dividing the string if
+** it reaches coment chars
+** P.S. the creator is sorry for sending j as a parameter (blame the norm)
 */
 
 void		divide_string_into_words(char *line, t_string *string, int j)
@@ -78,6 +81,11 @@ void		divide_string_into_words(char *line, t_string *string, int j)
 	if (quote || j != i)
 		add_word(allocate_and_define(line, j, i - 1, quote), string);
 }
+
+/*
+** read_and_save() uses divide_string_into_words() on
+** every not empty line that is obtained by gnl()
+*/
 
 t_string	*read_and_save(int ac, char **av)
 {

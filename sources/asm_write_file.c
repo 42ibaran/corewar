@@ -6,47 +6,31 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 15:30:38 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/29 14:22:17 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/01 18:33:07 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void	magic(int fd)
+void	zeros_and_magic(int fd, unsigned int number)
 {
-	unsigned int	magic_n;
 	unsigned int	divider;
 	char			c;
 
 	divider = 0x1000000;
-	magic_n = COREWAR_EXEC_MAGIC;
 	while (divider != 0)
 	{
-		c = magic_n / divider;
+		c = number / divider;
 		write(fd, &c, 1);
-		magic_n %= divider;
+		number %= divider;
 		divider /= 0x100;
-	}
-}
-
-void	zero(int fd, size_t n)
-{
-	size_t		i;
-
-	i = 0;
-	while (i < n)
-	{
-		write(fd, "\0", 1);
-		i++;
 	}
 }
 
 void	code_size(int fd, t_instruction *instr)
 {
-	int				size;
+	unsigned int	size;
 	t_operation		*oper;
-	unsigned int	divider;
-	char			c;
 
 	size = 0;
 	while (instr)
@@ -59,14 +43,7 @@ void	code_size(int fd, t_instruction *instr)
 		}
 		instr = instr->next;
 	}
-	divider = 0x1000000;
-	while (divider != 0)
-	{
-		c = size / divider;
-		write(fd, &c, 1);
-		size %= divider;
-		divider /= 0x100;
-	}
+	zeros_and_magic(fd, size);
 }
 
 void	exec_code(int fd, t_instruction *instr)
@@ -85,6 +62,12 @@ void	exec_code(int fd, t_instruction *instr)
 	}
 }
 
+/*
+** write_into_file() opens/creates file with .cor extention,
+** puts magic header, name, 4 zeros, code size, comment, 4 zeros and code
+** in it, closes the file and gives the result message
+*/
+
 void	write_into_file(t_output *out, char *name)
 {
 	int		fd;
@@ -95,12 +78,12 @@ void	write_into_file(t_output *out, char *name)
 	name = ft_strjoin(name, ".cor");
 	if ((fd = open(name, O_TRUNC | O_CREAT | O_WRONLY, S_IRUSR | S_IWUSR)) < 0)
 		error(ERR_WRITE);
-	magic(fd);
+	zeros_and_magic(fd, COREWAR_EXEC_MAGIC);
 	write(fd, out->champ->name, PROG_NAME_LENGTH);
-	zero(fd, 4);
+	zeros_and_magic(fd, 0);
 	code_size(fd, out->instr);
 	write(fd, out->champ->comment, COMMENT_LENGTH);
-	zero(fd, 4);
+	zeros_and_magic(fd, 0);
 	exec_code(fd, out->instr);
 	close(fd);
 	ft_printf("Writing output program to %s\n", name);
