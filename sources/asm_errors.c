@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/28 13:12:14 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/31 16:49:40 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/01 15:31:38 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,32 @@ void	error(char code)
 	exit(EXIT_FAILURE);
 }
 
+void	lex_error_next(char code, char *instr)
+{
+	if (code == ERR_INVALID_ARG)
+		ft_printf("Error [Line %d]: invalid argument '%s'\n",
+			g_input_l, instr);
+	else if (code == ERR_INV_REGISTER)
+		ft_printf("Error [Line %d]: invalid register\n", g_input_l);
+	else if (code == ERR_NO_NAME_OR_COMMENT)
+		ft_printf("Error [Line %d]: no name and/or comment\n", g_input_l);
+	else if (code == ERR_NAME_TOO_LONG)
+		ft_printf("Error [Line %d]: name too long\n", g_input_l);
+	else if (code == ERR_COMMENT_TOO_LONG)
+		ft_printf("Error [Line %d]: comment too long\n", g_input_l);
+	else if (code == ERR_NAME_EXISTS)
+		ft_printf("Error [Line %d]: name already exists\n", g_input_l);
+	else if (code == ERR_COMMENT_EXISTS)
+		ft_printf("Error [Line %d]: comment already exists\n", g_input_l);
+}
+
 void	lex_error(char code, char *instr)
 {
 	if (code == ERR_TOO_MANY_ARGS)
 		ft_printf("Error [Line %d]: too many arguments for instruction '%s'\n",
+			g_input_l, instr);
+	if (code == ERR_NOT_ENOUGH_ARGS)
+		ft_printf("Error [Line %d]: too few arguments for instruction '%s'\n",
 			g_input_l, instr);
 	else if (code == ERR_SEPARATOR)
 		ft_printf("Error [Line %d]: expected separator for instruction '%s'\n",
@@ -52,21 +74,8 @@ void	lex_error(char code, char *instr)
 	else if (code == ERR_UNKNOWN_LABEL)
 		ft_printf("Error [Line %d]: unknown label '%s'\n",
 			g_input_l, instr);
-	else if (code == ERR_INVALID_ARG)
-		ft_printf("Error [Line %d]: invalid argument '%s'\n",
-			g_input_l, instr);
-	else if (code == ERR_INV_REGISTER)
-		ft_printf("Error [Line %d]: invalid register\n", g_input_l);
-	else if (code == ERR_NO_NAME_OR_COMMENT)
-		ft_printf("Error [Line %d]: no name and/or comment\n", g_input_l);
-	else if (code == ERR_NAME_TOO_LONG)
-		ft_printf("Error [Line %d]: name too long\n", g_input_l);
-	else if (code == ERR_COMMENT_TOO_LONG)
-		ft_printf("Error [Line %d]: comment too long\n", g_input_l);
-	else if (code == ERR_NAME_EXISTS)
-		ft_printf("Error [Line %d]: name already exists\n", g_input_l);
-	else if (code == ERR_COMMENT_EXISTS)
-		ft_printf("Error [Line %d]: comment already exists\n", g_input_l);
+	else
+		lex_error_next(code, instr);
 	f_free();
 	exit(EXIT_FAILURE);
 }

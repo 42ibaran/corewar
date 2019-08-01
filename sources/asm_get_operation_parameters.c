@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 18:05:51 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/26 13:04:19 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/01 12:03:58 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_check_oper	get_check_operation(char code)
 	static t_check_oper	function[16] = {
 		&check_args_live, &check_args_ld, &check_args_st,
 		&check_args_add, &check_args_sub, &check_args_and,
-		&check_args_or, &check_args_xor,&check_args_zjmp,
+		&check_args_or, &check_args_xor, &check_args_zjmp,
 		&check_args_ldi, &check_args_sti, &check_args_fork,
 		&check_args_lld, &check_args_lldi, &check_args_lfork,
 		&check_args_aff
@@ -55,7 +55,7 @@ char			get_is_type_code_required(char code)
 	return (type_req[code - 1]);
 }
 
-char		get_oper_code(char *name)
+char			get_oper_code(char *name)
 {
 	static char		table[16][6] = {
 		"live", "ld", "st", "add", "sub", "and", "or", "xor",

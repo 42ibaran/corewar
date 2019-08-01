@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2019/07/29 18:47:56 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/01 16:27:58 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,6 @@
 # define NBR_LIVE				21
 # define MAX_CHECKS				10
 
-/*
-**
-*/
-
 typedef char					t_arg_type;
 
 # define T_REG 1
@@ -62,20 +58,8 @@ typedef char					t_arg_type;
 # define T_IND 4
 # define T_LAB 8
 
-/*
-**
-*/
-
 # define PROG_NAME_LENGTH		(128)
 # define COMMENT_LENGTH			(2048)
 # define COREWAR_EXEC_MAGIC		0xea83f3
-
-typedef struct					header_s
-{
-	unsigned int				magic;
-	char						prog_name[PROG_NAME_LENGTH + 1];
-	unsigned int				prog_size;
-	char						comment[COMMENT_LENGTH + 1];
-}								header_t;
 
 #endif

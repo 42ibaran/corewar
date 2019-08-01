@@ -6,17 +6,18 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 11:31:27 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/29 18:37:28 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/01 12:42:49 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int			instruction_first(t_operation *oper, t_instruction *instr)
+int				instruction_first(t_operation *oper, t_instruction *instr)
 {
 	t_operation		*tmp;
-	int				dist = 0;
+	int				dist;
 
+	dist = 0;
 	tmp = instr->operation;
 	while (tmp != oper)
 	{
@@ -32,10 +33,12 @@ int			instruction_first(t_operation *oper, t_instruction *instr)
 	return (-dist);
 }
 
-int			operation_first(t_operation *oper, t_instruction *instr,
-			t_instruction *prev_instr)
+int				operation_first(t_operation *oper, t_instruction *instr,
+				t_instruction *prev_instr)
 {
-	int				dist = 0;
+	int				dist;
+
+	dist = 0;
 	while (prev_instr != instr)
 	{
 		if (!oper)
@@ -52,42 +55,54 @@ int			operation_first(t_operation *oper, t_instruction *instr,
 	return (dist);
 }
 
-int			get_label_distance(t_operation *oper, t_instruction *instr,
-			char *name)
+t_instruction	*get_instr(t_instruction *first, char *name)
 {
-	char			f_label = 0;
-	char			f_oper = 0;
-	char			label_or_oper = 0;
-	t_operation		*inner_oper;
-	t_instruction 	*found_instr;
-	t_instruction	*prev_instr;
-
-	while (instr)
+	while (first)
 	{
-		inner_oper = instr->operation;
-		if (instr->name && !ft_strncmp(instr->name, name, ft_strlen(name))
-				&& !ft_strncmp(instr->name, name, ft_strlen(instr->name) - 1))
-		{
-			found_instr = instr;
-			label_or_oper = (label_or_oper == 0 ? 1 : label_or_oper);
-			f_label = 1;
-		}
-		while (inner_oper && !f_oper)
+		if (first->name && !ft_strncmp(first->name, name, ft_strlen(name))
+				&& !ft_strncmp(first->name, name, ft_strlen(first->name) - 1))
+			return (first);
+		first = first->next;
+	}
+	return (first);
+}
+
+int				get_prev_instr(t_instruction *first, t_operation *oper,
+				t_instruction *found, t_instruction **prev_instr)
+{
+	t_operation		*inner_oper;
+	int				label_or_oper;
+
+	label_or_oper = 0;
+	while (first)
+	{
+		inner_oper = first->operation;
+		if (first == found)
+			label_or_oper = 1;
+		while (inner_oper)
 		{
 			if (inner_oper == oper)
 			{
-				prev_instr = instr;
-				f_oper = 1;
-				label_or_oper = (label_or_oper == 0 ? 2 : label_or_oper);
-				break ;
+				*prev_instr = first;
+				return (label_or_oper == 0 ? 2 : label_or_oper);
 			}
 			inner_oper = inner_oper->next;
 		}
-		if (f_label && f_oper)
-			break ;
-		instr = instr->next;
+		first = first->next;
 	}
-	if (!instr)
+	return (-1);
+}
+
+int				get_label_distance(t_operation *oper, t_instruction *instr,
+				char *name)
+{
+	char			label_or_oper;
+	t_instruction	*found_instr;
+	t_instruction	*prev_instr;
+
+	found_instr = get_instr(instr, name);
+	label_or_oper = get_prev_instr(instr, oper, found_instr, &prev_instr);
+	if (!found_instr)
 		lex_error(ERR_UNKNOWN_LABEL, name);
 	if (label_or_oper == 1)
 		return (instruction_first(oper, found_instr));

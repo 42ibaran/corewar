@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 12:00:35 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/31 16:27:07 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/01 12:46:12 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,11 @@ static int		put_arg_val_into_binary(t_operation *oper, unsigned int arg_val,
 static int		encode_operation(t_operation *oper, t_instruction *instr,
 		int i, int j)
 {
-	__int128_t		arg_val = 0;
+	__int128_t		arg_val;
 	char			numcheck;
 	int				atoi_shift;
 
+	arg_val = 0;
 	atoi_shift = (oper->arg_type[j] == 2 ? 0 : 1);
 	if (oper->arg_type[j] == 0 || (numcheck = ft_strisnum(oper->arg_str[j]
 			+ atoi_shift)) == 1)
@@ -58,10 +59,11 @@ static int		encode_operation(t_operation *oper, t_instruction *instr,
 void			code(t_instruction *instr)
 {
 	t_operation		*oper;
-	t_instruction	*first_instr = instr;
-	int				i; // binary string index
-	int				j; // argument index
+	t_instruction	*first_instr;
+	int				i;
+	int				j;
 
+	first_instr = instr;
 	while (instr)
 	{
 		oper = instr->operation;

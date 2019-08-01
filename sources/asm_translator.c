@@ -6,43 +6,46 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 13:07:54 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/29 17:02:13 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/01 13:11:09 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
+void		start_translate(t_output **out)
+{
+	*out = init_output();
+	(*out)->instr = NULL;
+	(*out)->champ = init_champion();
+	g_free.first_out = *out;
+}
+
+char		is_good_to_code(t_output *out, t_word *word)
+{
+	return (out->champ->name_size != -1 && out->champ->comment_size != -1
+		&& !word->is_quote);
+}
+
 t_output	*translate(t_string *string)
 {
-	t_output	*out;
-	t_champion	*champ;
-	t_instruction *instr = NULL;
-	t_word		*word;
+	t_output		*out;
+	t_word			*word;
 
-	champ = init_champion();
-	g_free.first_champion = champ;
-	out = init_output();
-	g_free.first_out = out;
-	out->champ = champ;
-	while (string)
+	start_translate(&out);
+	while (string && (g_input_l = string->nbr))
 	{
-		g_input_l = string->nbr;
-		word = string->word;
-		if (!word)
+		if (!(word = string->word))
 		{
 			string = string->next;
 			continue ;
 		}
 		if (!ft_strcmp(word->str, NAME_CMD_STRING))
-			name(champ, string);
+			name(out->champ, string);
 		else if (!ft_strcmp(word->str, COMMENT_CMD_STRING))
-			comment(champ, string);
-		else if (champ->name_size != -1 && champ->comment_size != -1
-				&& !word->is_quote)
+			comment(out->champ, string);
+		else if (is_good_to_code(out, word))
 		{
-			instr = prepare_operations(string, NULL, NULL);
-			code(instr);
-			out->instr = instr;
+			code(out->instr = prepare_operations(string, NULL, NULL));
 			break ;
 		}
 		else if (!word->is_quote)

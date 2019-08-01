@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 17:07:11 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/31 11:06:23 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/01 11:51:18 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** return codes:
 ** -1 numeric but too long to be an int
 ** 0 not numeric characters
-** 1 length of int and numeric 
+** 1 length of int and numeric
 */
 
 int		ft_strisnum(char *str)

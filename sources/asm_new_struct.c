@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 12:57:17 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/29 17:21:40 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/01 13:06:56 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	init_globals(void)
 {
 	g_input_l = 0;
-	g_free.first_champion = NULL;
 	g_free.first_instr = NULL;
 	g_free.first_string = NULL;
 	g_free.first_out = NULL;

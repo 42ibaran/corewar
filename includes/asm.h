@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:58:50 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/31 16:27:08 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/01 16:25:50 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define ERR_UNKMOWN_OPERATION -11
 # define ERR_UNEXPECTED_TOKEN -12
 # define ERR_INVALID_ARG -13
+# define ERR_NOT_ENOUGH_ARGS -14
 
 # define MAX_ARG_VAL_ABS 0xffffff0000000000
 
@@ -72,7 +73,7 @@ typedef struct				s_string
 
 /*
 ** arg_type:
-** -1 = empty or error (which basically can't happen)
+** -1 = empty
 ** 0 = register
 ** 1 = direct
 ** 2 = indirect
@@ -119,13 +120,22 @@ typedef struct				s_free
 {
 	t_string				*first_string;
 	t_instruction			*first_instr;
-	t_champion				*first_champion;
 	t_output				*first_out;
 }							t_free;
+
+typedef struct				s_param_box
+{
+	char					*line;
+	int						i;
+	int						j;
+	t_string				*string;
+	char					quote;
+}							t_param_box;
 
 t_free						g_free;
 
 typedef void				(*t_check_oper)(t_operation*, t_word*);
+typedef char				(*t_check_arg)(t_word*);
 
 /*
 ** asm_errors.c
@@ -137,6 +147,12 @@ void						lex_error(char code, char *instr);
 ** asm_check.c
 */
 t_string					*read_and_save(int ac, char **av);
+
+/*
+** asm_define_word.c
+*/
+t_word						*allocate_and_define(char *line, int i, int j,
+							char quote);
 
 /*
 ** asm_init.c
@@ -230,28 +246,42 @@ void						check_args_lfork(t_operation *oper, t_word *word);
 void						check_args_aff(t_operation *oper, t_word *word);
 
 /*
-** asm_definition.c
+** asm_word_is_what.c
 */
-void						word_is_space(char *line, int j, int i,
-							t_word *word, char prev_quote);
-void						word_is_quote(char *line, int j, int i,
-							t_word *word, char prev_quote);
-void						word_is_separator(char *line, int j, int i,
-							t_word *word, char prev_quote);
-void						word_is_command(char *line, int j, int i,
-							t_word *word, char prev_quote);
-void						word_is_label(char *line, int j, int i,
-							t_word *word, char prev_quote);
-void						word_is_instruction(char *line, int j, int i,
-							t_word *word, char prev_quote);
+char						w_is_reg(t_word *word);
+char						w_is_dir(t_word *word);
+char						w_is_indir(t_word *word);
+
+/*
+** asm_check_arg.c
+*/
+void						check_arg(t_word **word, t_check_arg *f,
+							char *oper);
+void						check_sep(t_word **word, char *oper);
+void						check_null(t_word **word, char *oper);
+
+/*
+** asm_get_f_arr.c
+*/
+t_check_arg					*get_f_arr(int code);
+
+/*
+** asm_definition_1.c && asm_definition_2.c
+*/
+void						word_is_space(char *line, int j, t_word *word);
+void						word_is_direct(char *line, int j, t_word *word);
+void						word_is_indirect(t_word *word);
+void						word_is_label(char *line, int j, t_word *word);
+void						word_is_separator(char *line, int j, t_word *word);
+void						word_is_quote(t_word *word, char quote);
 void						word_is_operation(char *line, int j, int i,
-							t_word *word, char prev_quote);
+							t_word *word);
 void						word_is_register(char *line, int j, int i,
-							t_word *word, char prev_quote);
-void						word_is_direct(char *line, int j, int i,
-							t_word *word, char prev_quote);
-void						word_is_indirect(char *line, int j, int i,
-							t_word *word, char prev_quote);
+							t_word *word);
+void						word_is_command(char *line, int j, int i,
+							t_word *word);
+void						word_is_instruction(char *line, int i,
+							t_word *word);
 
 /*
 ** asm_get_label_distance.c
@@ -270,4 +300,3 @@ int							process_negative_val(__int128_t val, char arg_size);
 void						f_free(void);
 
 #endif
-

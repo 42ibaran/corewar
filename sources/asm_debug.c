@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 14:57:20 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/29 12:13:49 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/01 11:52:26 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	print_strings(t_string *string)
 	}
 }
 
-void		print_definition(t_word *word)
+void	print_definition(t_word *word)
 {
 	if (!word)
 		return ;
@@ -55,13 +55,11 @@ void		print_definition(t_word *word)
 		ft_printf(" name ");
 	if (word->is_comment)
 		ft_printf(" comment ");
-	if (word->is_space)
-		ft_printf(" space ");
 	if (word->is_quote)
 		ft_printf(" quote ");
 }
 
-void		print_all_instuctions(t_instruction *instr)
+void	print_all_instuctions(t_instruction *instr)
 {
 	t_operation		*oper;
 	int				i;

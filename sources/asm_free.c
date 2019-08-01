@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/28 15:56:48 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/28 16:16:27 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/01 13:07:57 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,14 @@ void	f_free_strings(t_string *string)
 
 void	f_free(void)
 {
-	if (g_free.first_champion)
-		free(g_free.first_champion);
 	if (g_free.first_instr)
 		f_free_instructions(g_free.first_instr);
 	if (g_free.first_string)
 		f_free_strings(g_free.first_string);
 	if (g_free.first_out)
+	{
+		if (g_free.first_out->champ)
+			free(g_free.first_out->champ);
 		free(g_free.first_out);
+	}
 }
