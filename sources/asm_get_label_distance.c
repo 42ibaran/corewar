@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 11:31:27 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/01 18:12:57 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/01 18:48:04 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int				operation_first(t_operation *oper, t_instruction *instr,
 ** 3. check if label was found in the list of instructions
 ** 4. calculate distance depending on label_or_oper value
 */
+
 int				get_label_distance(t_operation *oper, t_instruction *instr,
 				char *name)
 {

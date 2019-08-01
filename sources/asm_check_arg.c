@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 14:31:39 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/01 18:03:47 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/01 18:47:56 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	check_sep(t_word **word, char *oper)
 ** check_null() checks if a word is null which means that there're no extra
 ** arguments
 */
+
 void	check_null(t_word **word, char *oper)
 {
 	*word = (*word)->next;
