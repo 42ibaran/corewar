@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 14:28:02 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/01 12:45:05 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/06 12:45:09 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_word			*init_word(char *line, int j, int i)
 	word->is_comment = 0;
 	word->is_space = 0;
 	word->is_quote = 0;
+	word->quote_is_open = 0;
 	word->next = NULL;
 	return (word);
 }

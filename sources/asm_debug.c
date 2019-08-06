@@ -6,32 +6,13 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 14:57:20 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/01 11:52:26 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/06 14:54:56 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void	print_strings(t_string *string)
-{
-	t_word		*word;
-
-	while (string)
-	{
-		ft_putnbr(string->nbr);
-		word = string->word;
-		while (word)
-		{
-			ft_printf("%s", word->str);
-			print_definition(word);
-			word = word->next;
-		}
-		ft_printf("\n");
-		string = string->next;
-	}
-}
-
-void	print_definition(t_word *word)
+static void		print_definition(t_word *word)
 {
 	if (!word)
 		return ;
@@ -56,10 +37,34 @@ void	print_definition(t_word *word)
 	if (word->is_comment)
 		ft_printf(" comment ");
 	if (word->is_quote)
-		ft_printf(" quote ");
+	{
+		if (word->quote_is_open)
+			ft_printf(" open quote ");
+		else
+			ft_printf(" closed quote ");
+	}
 }
 
-void	print_all_instuctions(t_instruction *instr)
+void			print_strings(t_string *string)
+{
+	t_word		*word;
+
+	while (string)
+	{
+		ft_putnbr(string->nbr);
+		word = string->word;
+		while (word)
+		{
+			ft_printf("%s", word->str);
+			print_definition(word);
+			word = word->next;
+		}
+		ft_printf("\n");
+		string = string->next;
+	}
+}
+
+void			print_all_instuctions(t_instruction *instr)
 {
 	t_operation		*oper;
 	int				i;

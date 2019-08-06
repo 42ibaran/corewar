@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 16:16:30 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/01 13:19:00 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/06 13:37:08 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,8 @@ void		word_is_command(char *line, int j, int i, t_word *word)
 void		word_is_quote(t_word *word, char quote)
 {
 	if (quote)
+	{
 		word->is_quote = 1;
+		word->quote_is_open = 1;
+	}
 }

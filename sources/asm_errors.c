@@ -6,13 +6,13 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/28 13:12:14 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/01 15:31:38 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/06 14:57:49 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void	error(char code)
+void			error(char code)
 {
 	if (code == ERR_MEMORY)
 		ft_printf("Error: can't allocate memory\n");
@@ -32,7 +32,7 @@ void	error(char code)
 	exit(EXIT_FAILURE);
 }
 
-void	lex_error_next(char code, char *instr)
+static void		lex_error_next(char code, char *instr)
 {
 	if (code == ERR_INVALID_ARG)
 		ft_printf("Error [Line %d]: invalid argument '%s'\n",
@@ -51,7 +51,7 @@ void	lex_error_next(char code, char *instr)
 		ft_printf("Error [Line %d]: comment already exists\n", g_input_l);
 }
 
-void	lex_error(char code, char *instr)
+void			lex_error(char code, char *instr)
 {
 	if (code == ERR_TOO_MANY_ARGS)
 		ft_printf("Error [Line %d]: too many arguments for instruction '%s'\n",

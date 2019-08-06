@@ -6,13 +6,13 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 15:30:38 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/01 18:45:04 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/06 15:10:16 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void	zeros_and_magic(int fd, unsigned int number)
+static void		number_8_bit(int fd, unsigned int number)
 {
 	unsigned int	divider;
 	char			c;
@@ -27,7 +27,7 @@ void	zeros_and_magic(int fd, unsigned int number)
 	}
 }
 
-void	code_size(int fd, t_instruction *instr)
+static void		code_size(int fd, t_instruction *instr)
 {
 	unsigned int	size;
 	t_operation		*oper;
@@ -43,10 +43,10 @@ void	code_size(int fd, t_instruction *instr)
 		}
 		instr = instr->next;
 	}
-	zeros_and_magic(fd, size);
+	number_8_bit(fd, size);
 }
 
-void	exec_code(int fd, t_instruction *instr)
+static void		exec_code(int fd, t_instruction *instr)
 {
 	t_operation		*oper;
 
@@ -68,7 +68,7 @@ void	exec_code(int fd, t_instruction *instr)
 ** in it, closes the file and gives the result message
 */
 
-void	write_into_file(t_output *out, char *name)
+void			write_into_file(t_output *out, char *name)
 {
 	int		fd;
 
@@ -81,12 +81,12 @@ void	write_into_file(t_output *out, char *name)
 		free(name);
 		error(ERR_WRITE);
 	}
-	zeros_and_magic(fd, COREWAR_EXEC_MAGIC);
+	number_8_bit(fd, COREWAR_EXEC_MAGIC);
 	write(fd, out->champ->name, PROG_NAME_LENGTH);
-	zeros_and_magic(fd, 0);
+	number_8_bit(fd, 0);
 	code_size(fd, out->instr);
 	write(fd, out->champ->comment, COMMENT_LENGTH);
-	zeros_and_magic(fd, 0);
+	number_8_bit(fd, 0);
 	exec_code(fd, out->instr);
 	close(fd);
 	ft_printf("Writing output program to %s\n", name);

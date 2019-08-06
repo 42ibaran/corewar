@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:57:01 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/01 18:24:32 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/06 15:08:59 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** checks if the name of the file is valid and tries to open the file
 */
 
-int			check_args(int ac, char **av)
+static int		check_args(int ac, char **av)
 {
 	char	*pos;
 
@@ -29,7 +29,7 @@ int			check_args(int ac, char **av)
 	return (open(av[ac - 1], O_RDONLY));
 }
 
-void		add_word(t_word *word, t_string *string)
+static void		add_word(t_word *word, t_string *string)
 {
 	if (!word)
 		return ;
@@ -53,7 +53,7 @@ char		is_end_of_word(char *line, char quote, int i)
 ** P.S. the creator is sorry for sending j as a parameter (blame the norm)
 */
 
-void		divide_string_into_words(char *line, t_string *string, int j)
+static void		divide_string_into_words(char *line, t_string *string, int j)
 {
 	static char		quote = 0;
 	int				i;
@@ -87,7 +87,7 @@ void		divide_string_into_words(char *line, t_string *string, int j)
 ** every not empty line that is obtained by gnl()
 */
 
-t_string	*read_and_save(int ac, char **av)
+t_string		*read_and_save(int ac, char **av)
 {
 	int			fd;
 	char		*line;

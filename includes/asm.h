@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:58:50 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/01 18:00:07 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/06 15:26:11 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 ** ==================== Constant definition ===================================
 */
 
-# define MAX_ARG_VAL_ABS 0xffffff0000000000
+# define MAX_ARG_VAL_ABS 0x7FFFFFFFFFFFFFFF
 
 /*
 ** ==================== Global variable line of input =========================
@@ -72,6 +72,7 @@ typedef struct				s_word
 	char					is_comment;
 	char					is_space;
 	char					is_quote;
+	char					quote_is_open;
 	struct s_word			*next;
 }							t_word;
 /*
@@ -194,7 +195,6 @@ t_operation					*init_operation(char *name);
 ** ==================== asm_debug.c ===========================================
 */
 void						print_strings(t_string *string);
-void						print_definition(t_word *word);
 void						print_all_instuctions(t_instruction *instr);
 /*
 ** ==================== asm_new_struct.c ======================================
@@ -209,7 +209,7 @@ void						init_globals(void);
 /*
 ** ==================== asm_translator.c ======================================
 */
-t_output					*translate(t_string *string);
+t_output					*translate(t_string *string, int skip_lines);
 void						putchar_in_out(t_output *out, char c);
 char						oper_name_to_code(char *name);
 /*
@@ -219,11 +219,11 @@ void						write_into_file(t_output *out, char *name);
 /*
 ** ==================== asm_put_name.c ========================================
 */
-void						name(t_champion *champ, t_string *string);
+int							name(t_champion *champ, t_string *string);
 /*
 ** ==================== asm_put_comment.c =====================================
 */
-void						comment(t_champion *champ, t_string *string);
+int							comment(t_champion *champ, t_string *string);
 /*
 ** ==================== asm_put_code.c ========================================
 */

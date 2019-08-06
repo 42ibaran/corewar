@@ -6,13 +6,13 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 12:07:42 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/01 12:43:43 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/06 15:07:51 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-unsigned char	calculate_arg_type_code(t_operation *oper)
+static unsigned char	calculate_arg_type_code(t_operation *oper)
 {
 	int				i;
 	char			arg_type_code;
@@ -32,7 +32,8 @@ unsigned char	calculate_arg_type_code(t_operation *oper)
 	return (arg_type_code);
 }
 
-void			fill_arg_type(t_operation *oper, t_word *word, char arg_nbr)
+void					fill_arg_type(t_operation *oper, t_word *word,
+						char arg_nbr)
 {
 	char	type;
 
@@ -60,7 +61,8 @@ void			fill_arg_type(t_operation *oper, t_word *word, char arg_nbr)
 ** allocate memory for it and calculate arg_type_code
 */
 
-void			fill_operation(t_operation *oper, t_word *word, int line_nbr)
+static void				fill_operation(t_operation *oper, t_word *word,
+						int line_nbr)
 {
 	t_check_oper	checking_fun;
 	int				i;
@@ -82,8 +84,8 @@ void			fill_operation(t_operation *oper, t_word *word, int line_nbr)
 		error(ERR_MEMORY);
 }
 
-t_instruction	*prepare_operations(t_string *string, t_instruction *instr,
-				t_instruction *next_instr)
+t_instruction			*prepare_operations(t_string *string,
+						t_instruction *instr, t_instruction *next_instr)
 {
 	t_word			*word;
 

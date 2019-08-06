@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 11:31:27 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/01 18:48:04 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/06 14:59:29 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** step number 1
 */
 
-t_instruction	*get_instr(t_instruction *first, char *name)
+static t_instruction	*get_instr(t_instruction *first, char *name)
 {
 	while (first)
 	{
@@ -32,8 +32,8 @@ t_instruction	*get_instr(t_instruction *first, char *name)
 ** step number 2
 */
 
-int				get_prev_instr(t_instruction *first, t_operation *oper,
-				t_instruction *found, t_instruction **prev_instr)
+static int				get_prev_instr(t_instruction *first, t_operation *oper,
+						t_instruction *found, t_instruction **prev_instr)
 {
 	t_operation		*inner_oper;
 	int				label_or_oper;
@@ -62,7 +62,8 @@ int				get_prev_instr(t_instruction *first, t_operation *oper,
 ** step number 4
 */
 
-int				instruction_first(t_operation *oper, t_instruction *instr)
+static int				instruction_first(t_operation *oper,
+						t_instruction *instr)
 {
 	t_operation		*tmp;
 	int				dist;
@@ -83,8 +84,8 @@ int				instruction_first(t_operation *oper, t_instruction *instr)
 	return (-dist);
 }
 
-int				operation_first(t_operation *oper, t_instruction *instr,
-				t_instruction *prev_instr)
+static int				operation_first(t_operation *oper, t_instruction *instr,
+						t_instruction *prev_instr)
 {
 	int				dist;
 
@@ -115,8 +116,8 @@ int				operation_first(t_operation *oper, t_instruction *instr,
 ** 4. calculate distance depending on label_or_oper value
 */
 
-int				get_label_distance(t_operation *oper, t_instruction *instr,
-				char *name)
+int						get_label_distance(t_operation *oper,
+						t_instruction *instr, char *name)
 {
 	char			label_or_oper;
 	t_instruction	*found_instr;

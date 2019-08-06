@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 16:23:51 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/01 16:23:59 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/06 14:57:27 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** define() uses functions word_is_*** trying to give a word a definition
 */
 
-t_word		*define(char *line, int j, int i, char quote)
+static t_word		*define(char *line, int j, int i, char quote)
 {
 	t_word		*word;
 
@@ -37,14 +37,14 @@ t_word		*define(char *line, int j, int i, char quote)
 	return (word);
 }
 
-char		word_is_something(t_word *word)
+static char		word_is_something(t_word *word)
 {
 	return (word->is_command || word->is_instruction || word->is_operation
 		|| word->is_label || word->is_register || word->is_direct
 		|| word->is_indirect || word->is_quote || word->is_separator);
 }
 
-t_word		*allocate_and_define(char *line, int i, int j, char quote)
+t_word			*allocate_and_define(char *line, int i, int j, char quote)
 {
 	t_word		*word;
 
@@ -52,7 +52,16 @@ t_word		*allocate_and_define(char *line, int i, int j, char quote)
 		return (NULL);
 	word = define(line, i, j, quote);
 	if (word_is_something(word))
+	{
+		if (i != j && quote)
+		{
+			if (line[j + 1] == '\"')
+				word->quote_is_open = 0;
+			else
+				word->quote_is_open = 1;
+		}
 		return (word);
+	}
 	else
 	{
 		free(word->str);

@@ -6,13 +6,13 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/28 15:56:48 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/01 13:07:57 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/06 14:58:32 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void	f_free_instructions(t_instruction *instr)
+static void		f_free_instructions(t_instruction *instr)
 {
 	t_operation		*oper;
 	void			*next;
@@ -33,7 +33,7 @@ void	f_free_instructions(t_instruction *instr)
 	}
 }
 
-void	f_free_strings(t_string *string)
+static void		f_free_strings(t_string *string)
 {
 	t_word			*word;
 	void			*next;
@@ -55,7 +55,7 @@ void	f_free_strings(t_string *string)
 	}
 }
 
-void	f_free(void)
+void			f_free(void)
 {
 	if (g_free.first_instr)
 		f_free_instructions(g_free.first_instr);
