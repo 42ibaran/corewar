@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 16:16:30 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/01 12:02:48 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/06 15:44:49 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,13 @@ void		word_is_space(char *line, int j, t_word *word)
 		word->is_space = 1;
 }
 
-void		word_is_instruction(char *line, int i, t_word *word)
+void		word_is_instruction(char *line, int i, int j, t_word *word)
 {
 	if (line[i] == ':')
+	{
 		word->is_instruction = 1;
+		check_label_chars(line, i, j);
+	}
 }
 
 void		word_is_operation(char *line, int j, int i, t_word *word)

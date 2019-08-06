@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:58:50 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/06 15:26:11 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/06 15:46:24 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define ERR_UNEXPECTED_TOKEN -12
 # define ERR_INVALID_ARG -13
 # define ERR_SEPARATOR -14
+# define ERR_INVALID_LABEL -15
 
 /*
 ** ==================== Constant definition ===================================
@@ -274,6 +275,8 @@ void						check_arg(t_word **word, t_check_arg *f,
 							char *oper);
 void						check_sep(t_word **word, char *oper);
 void						check_null(t_word **word, char *oper);
+void						check_label_chars(char *line, int i, int j);
+
 /*
 ** ==================== asm_get_f_arr.c =======================================
 */
@@ -293,7 +296,7 @@ void						word_is_register(char *line, int j, int i,
 							t_word *word);
 void						word_is_command(char *line, int j, int i,
 							t_word *word);
-void						word_is_instruction(char *line, int i,
+void						word_is_instruction(char *line, int i, int j,
 							t_word *word);
 /*
 ** ==================== asm_get_label_distance.c ==============================

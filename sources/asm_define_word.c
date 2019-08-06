@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 16:23:51 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/06 14:57:27 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/06 15:38:49 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_word		*define(char *line, int j, int i, char quote)
 	if (!word->is_space && !word->is_quote && !word->is_separator)
 	{
 		word_is_command(line, j, i, word);
-		word_is_instruction(line, i, word);
+		word_is_instruction(line, i, j, word);
 		word_is_operation(line, j, i, word);
 		word_is_label(line, j, word);
 		word_is_register(line, j, i, word);
