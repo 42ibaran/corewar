@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 14:57:20 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/06 14:54:56 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/06 16:07:08 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,7 @@ static void		print_definition(t_word *word)
 	if (word->is_comment)
 		ft_printf(" comment ");
 	if (word->is_quote)
-	{
-		if (word->quote_is_open)
-			ft_printf(" open quote ");
-		else
-			ft_printf(" closed quote ");
-	}
+		ft_printf(" %s quote ", (word->quote_is_open ? "open" : "closed"));
 }
 
 void			print_strings(t_string *string)

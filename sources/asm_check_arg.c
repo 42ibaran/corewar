@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 14:31:39 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/06 15:46:10 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/06 16:05:50 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	check_null(t_word **word, char *oper)
 		lex_error(ERR_TOO_MANY_ARGS, oper);
 }
 
-void		check_label_chars(char *line, int i, int j)
+void	check_label_chars(char *line, int i, int j)
 {
 	while (j < i)
 	{

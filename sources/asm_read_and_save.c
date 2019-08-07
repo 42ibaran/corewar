@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:57:01 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/06 15:08:59 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/07 15:30:28 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void		add_word(t_word *word, t_string *string)
 	string->last_word = word;
 }
 
-char		is_end_of_word(char *line, char quote, int i)
+static char		is_end_of_word(char *line, char quote, int i)
 {
 	return (!quote && (line[i] == SEPARATOR_CHAR || line[i] == ' '
 		|| line[i] == '\t' || line[i] == '\n'));
@@ -78,8 +78,9 @@ static void		divide_string_into_words(char *line, t_string *string, int j)
 			j = i + 1;
 		}
 	}
-	if (quote || j != i)
-		add_word(allocate_and_define(line, j, i - 1, quote), string);
+	add_word(allocate_and_define(line, j, i - 1, quote), string);
+	if (!quote && line[i] == '\0' && string->last_word)
+		error(ERR_END);
 }
 
 /*

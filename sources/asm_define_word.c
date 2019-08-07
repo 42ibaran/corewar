@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 16:23:51 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/06 15:38:49 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/07 15:22:13 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** define() uses functions word_is_*** trying to give a word a definition
 */
 
-static t_word		*define(char *line, int j, int i, char quote)
+static t_word	*define(char *line, int j, int i, char quote)
 {
 	t_word		*word;
 
@@ -37,7 +37,7 @@ static t_word		*define(char *line, int j, int i, char quote)
 	return (word);
 }
 
-static char		word_is_something(t_word *word)
+char			word_is_something(t_word *word)
 {
 	return (word->is_command || word->is_instruction || word->is_operation
 		|| word->is_label || word->is_register || word->is_direct

@@ -6,7 +6,7 @@
 #    By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/10 13:28:55 by ibaran            #+#    #+#              #
-#    Updated: 2019/08/01 16:24:33 by ibaran           ###   ########.fr        #
+#    Updated: 2019/08/06 18:10:20 by ibaran           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,7 @@ SRC_NAME_ASM		:=	asm.c \
 						asm_new_struct.c \
 						asm_translator.c \
 						asm_write_file.c \
-						asm_put_name.c \
-						asm_put_comment.c \
+						asm_put_name_and_comment.c \
 						asm_prepare_operations.c \
 						asm_put_code.c \
 						asm_process_negative_arg_val.c \
