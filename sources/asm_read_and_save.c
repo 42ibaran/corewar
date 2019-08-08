@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:57:01 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/08 16:45:20 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/08 16:57:20 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int		check_args(int ac, char **av)
 	if (ac == 1)
 		error(ERR_USAGE);
 	pos = ft_strstr(av[ac - 1], ".s");
-	if (!pos || ft_strcmp(pos, ".s") || pos == av[ac - 1])
+	if (!pos || ft_strcmp(pos, ".s"))
 		error(ERR_USAGE);
 	return (open(av[ac - 1], O_RDONLY));
 }
