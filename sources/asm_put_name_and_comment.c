@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 18:21:11 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/06 18:19:15 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/08 14:47:30 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ static char		concat_name(t_champion *champ, t_string *string, t_word *word)
 int				name(t_champion *champ, t_string *string)
 {
 	t_word		*word;
-	int			to_return = -1;
+	int			to_return;
 
+	to_return = -1;
 	if (champ->name_size != -1)
 		lex_error(ERR_NAME_EXISTS, NULL);
 	while (string)
@@ -70,8 +71,9 @@ static char		concat_comment(t_champion *champ, t_string *string,
 int				comment(t_champion *champ, t_string *string)
 {
 	t_word		*word;
-	int			to_return = -1;
+	int			to_return;
 
+	to_return = -1;
 	if (champ->comment_size != -1)
 		lex_error(ERR_COMMENT_EXISTS, NULL);
 	while (string)

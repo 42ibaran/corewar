@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/28 13:12:14 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/06 15:42:47 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/08 15:42:53 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static void		lex_error_next(char code, char *instr)
 		ft_printf("Error [Line %d]: comment already exists\n", g_input_l);
 	else if (code == ERR_INVALID_LABEL)
 		ft_printf("Error [Line %d]: invalid label\n", g_input_l);
+	else if (code == ERR_EXPECTED_OPERATION)
+		ft_printf("Error [Line %d]: expected operation\n", g_input_l);
 }
 
 void			lex_error(char code, char *instr)

@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 12:00:35 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/01 18:16:22 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/08 14:50:46 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int		encode_operation(t_operation *oper, t_instruction *instr,
 
 	arg_val = 0;
 	atoi_shift = (oper->arg_type[j] == 2 ? 0 : 1);
-	if (oper->arg_type[j] == 0 || (numcheck = ft_strisnum(oper->arg_str[j]
+	if (oper->arg_type[j] == 0 || (numcheck = ft_strisnum_asm(oper->arg_str[j]
 			+ atoi_shift)) == 1)
 		arg_val = ft_atoint128(oper->arg_str[j] + atoi_shift);
 	else if (numcheck == -1)

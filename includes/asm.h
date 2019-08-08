@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:58:50 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/06 18:11:10 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/08 15:42:33 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 # define ERR_INVALID_ARG -13
 # define ERR_SEPARATOR -14
 # define ERR_INVALID_LABEL -15
+# define ERR_EXPECTED_OPERATION -16
 
 /*
 ** ==================== Constant definition ===================================

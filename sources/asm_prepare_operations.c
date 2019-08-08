@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 12:07:42 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/06 15:07:51 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/08 15:47:50 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ t_instruction			*prepare_operations(t_string *string,
 	if (word)
 	{
 		new_operation(&instr, &next_instr, word->str);
+		if (!word->is_operation)
+			lex_error(ERR_EXPECTED_OPERATION, NULL);
 		fill_operation(next_instr->last_operation, word, string->nbr);
 		next_instr->length += (next_instr->length == -1 ? 1 : 0);
 		next_instr->length += next_instr->last_operation->length;

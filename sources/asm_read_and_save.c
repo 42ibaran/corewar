@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:57:01 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/07 15:30:28 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/08 15:26:48 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void		divide_string_into_words(char *line, t_string *string, int j)
 	int				i;
 
 	i = -1;
-	while (line[++i])
+	while (line[++i] /*&& line[i] != '\n'*/)
 	{
 		if ((line[i] == COMMENT_CHAR || line[i] == DEF_COMMENT_CHAR) && !quote)
 			break ;
@@ -114,5 +114,6 @@ t_string		*read_and_save(int ac, char **av)
 	else
 		error(ERR_READ);
 	g_input_l = 0;
+	// print_strings(string);
 	return (string);
 }

@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 19:42:11 by ibaran            #+#    #+#             */
-/*   Updated: 2019/07/31 14:01:54 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/08 14:52:34 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ char				*ft_strndup(const char *src, size_t n);
 void				ft_printinttab(int **array, size_t size);
 int					ft_atoi_base(const char *str, size_t base);
 int					ft_strisnum(char *str);
+int					ft_strisnum_asm(char *str);
 void				ft_swap(long long *a, long long *b);
 void				ft_freewordtab(char **pointer);
 char				*ft_strjoinfree(char *s1, char *s2, int n);
