@@ -6,7 +6,7 @@
 #    By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/10 13:28:55 by ibaran            #+#    #+#              #
-#    Updated: 2019/08/06 18:10:20 by ibaran           ###   ########.fr        #
+#    Updated: 2019/08/08 17:17:50 by ibaran           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,11 +53,6 @@ LIB_PATH			:=	./libft
 
 CFLAGS				:=	-Wall -Wextra -Werror
 
-#SDL_INC		:=	/Users/$(USER)/.brew/Cellar/sdl2/2.0.9_1/include/SDL2/
-#SDL_TTF_INC	:=	/Users/$(USER)/.brew/Cellar/sdl2_ttf/2.0.15/include/SDL2/
-#SDL			:=	/Users/$(USER)/.brew/Cellar/sdl2/2.0.9_1/lib/
-#SDL_TTF		:=	/Users/$(USER)/.brew/Cellar/sdl2_ttf/2.0.15/lib/
-
 OBJ_PATH			:=	./objects
 
 SRC_ASM				:=	$(addprefix $(SRC_PATH)/, $(SRC_NAME_ASM))
@@ -94,7 +89,7 @@ $(LIBFT):
 	@$(MAKE) -C $(LIB_PATH)
 
 norm:
-	norminette **/*.[ch] | grep -B1 "Error"
+	@norminette **/*.[ch]
 
 clean:
 	@$(MAKE) -C $(LIB_PATH) $@

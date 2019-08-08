@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:58:50 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/08 15:42:33 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/08 17:10:29 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "op.h"
 
 /*
-** ==================== Error codes ===========================================
+** ==================== Error codes
 */
 
 # define ERR_MEMORY 1
@@ -47,17 +47,17 @@
 # define ERR_EXPECTED_OPERATION -16
 
 /*
-** ==================== Constant definition ===================================
+** ==================== Max arg_val definition
 */
 
 # define MAX_ARG_VAL_ABS 0x7FFFFFFFFFFFFFFF
 
 /*
-** ==================== Global variable line of input =========================
+** ==================== Global variable line of input
 */
 int							g_input_l;
 /*
-** ==================== Word structure ========================================
+** ==================== Word structure
 */
 typedef struct				s_word
 {
@@ -78,7 +78,7 @@ typedef struct				s_word
 	struct s_word			*next;
 }							t_word;
 /*
-** ==================== String structure ======================================
+** ==================== String structure
 */
 typedef struct				s_string
 {
@@ -89,7 +89,7 @@ typedef struct				s_string
 	struct s_string			*next;
 }							t_string;
 /*
-** ==================== Operation structure ===================================
+** ==================== Operation structure
 **
 ** arg_type:
 ** -1 = empty
@@ -112,7 +112,7 @@ typedef struct				s_operation
 	struct s_operation		*next;
 }							t_operation;
 /*
-** ==================== Instruction structure =================================
+** ==================== Instruction structure
 */
 typedef struct				s_instruction
 {
@@ -123,7 +123,7 @@ typedef struct				s_instruction
 	struct s_instruction	*next;
 }							t_instruction;
 /*
-** ==================== Champion structure ====================================
+** ==================== Champion structure
 */
 typedef struct				s_champion
 {
@@ -133,7 +133,7 @@ typedef struct				s_champion
 	int						comment_size;
 }							t_champion;
 /*
-** ==================== Output structure ======================================
+** ==================== Output structure
 */
 typedef struct				s_output
 {
@@ -141,7 +141,7 @@ typedef struct				s_output
 	t_instruction			*instr;
 }							t_output;
 /*
-** ==================== Free structure ========================================
+** ==================== Free structure
 ** Contains pointers to structures that must be feed in case of an error
 ** or at the end of the program execution. Global variable to easily access
 ** the data from any point of program
@@ -155,7 +155,7 @@ typedef struct				s_free
 
 t_free						g_free;
 /*
-** ==================== Return value typedef ==================================
+** ==================== Return value typedef
 ** definition of type that is returned by functions:
 ** get_check_operation() and get_f_arr()
 ** that return pointers to functions
@@ -164,26 +164,24 @@ typedef void				(*t_check_oper)(t_operation*, t_word*);
 typedef char				(*t_check_arg)(t_word*);
 
 /*
-** ============================================================================
-** ==================== Functions prototypes ==================================
-** ============================================================================
-** ==================== asm_errors.c ==========================================
+** ==================== Functions prototypes
+** ==================== asm_errors.c
 */
 void						error(char code);
 void						lex_error(char code, char *instr);
 /*
-** ==================== asm_check.c ===========================================
+** ==================== asm_check.c
 */
 t_string					*read_and_save(int ac, char **av);
 /*
-** ==================== asm_define_word.c =====================================
+** ==================== asm_define_word.c
 */
 t_word						*allocate_and_define(char *line, int i, int j,
 							char quote);
 char						word_is_something(t_word *word);
 
 /*
-** ==================== asm_init.c ============================================
+** ==================== asm_init.c
 */
 t_string					*init_string(int nbr);
 t_word						*init_word(char *line, int j, int i);
@@ -192,12 +190,12 @@ t_champion					*init_champion(void);
 t_instruction				*init_instruction(char *name);
 t_operation					*init_operation(char *name);
 /*
-** ==================== asm_debug.c ===========================================
+** ==================== asm_debug.c
 */
 void						print_strings(t_string *string);
 void						print_all_instuctions(t_instruction *instr);
 /*
-** ==================== asm_new_struct.c ======================================
+** ==================== asm_new_struct.c
 */
 void						new_string(t_string **string, t_string
 							**next_string, int nbr);
@@ -207,40 +205,40 @@ void						new_operation(t_instruction **instr, t_instruction
 							**next_instr, char *str);
 void						init_globals(void);
 /*
-** ==================== asm_translator.c ======================================
+** ==================== asm_translator.c
 */
 t_output					*translate(t_string *string, int skip_lines);
 void						putchar_in_out(t_output *out, char c);
 char						oper_name_to_code(char *name);
 /*
-** ==================== asm_write_file.c ======================================
+** ==================== asm_write_file.c
 */
 void						write_into_file(t_output *out, char *name);
 /*
-** ==================== asm_put_name_and_comment.c ============================
+** ==================== asm_put_name_and_comment.c
 */
 int							name(t_champion *champ, t_string *string);
 int							comment(t_champion *champ, t_string *string);
 /*
-** ==================== asm_put_code.c ========================================
+** ==================== asm_put_code.c
 */
 void						code(t_instruction *instr);
 /*
-** ==================== asm_prepare_operations.c ==============================
+** ==================== asm_prepare_operations.c
 */
 t_instruction				*prepare_operations(t_string *string,
 							t_instruction *instr, t_instruction *next_instr);
 void						fill_arg_type(t_operation *oper, t_word *word,
 							char arg_nbr);
 /*
-** ==================== asm_get_operation_parameters.c ========================
+** ==================== asm_get_operation_parameters.c
 */
 t_check_oper				get_check_operation(char code);
 char						get_dir_size(char code);
 char						get_is_type_code_required(char code);
 char						get_oper_code(char *name);
 /*
-** ==================== asm_check_operations.c ================================
+** ==================== asm_check_operations.c
 */
 void						check_args_live(t_operation *oper, t_word *word);
 void						check_args_ld(t_operation *oper, t_word *word);
@@ -259,13 +257,13 @@ void						check_args_lldi(t_operation *oper, t_word *word);
 void						check_args_lfork(t_operation *oper, t_word *word);
 void						check_args_aff(t_operation *oper, t_word *word);
 /*
-** ==================== asm_word_is_what.c ====================================
+** ==================== asm_word_is_what.c
 */
 char						w_is_reg(t_word *word);
 char						w_is_dir(t_word *word);
 char						w_is_indir(t_word *word);
 /*
-** ==================== asm_check_arg.c =======================================
+** ==================== asm_check_arg.c
 */
 void						check_arg(t_word **word, t_check_arg *f,
 							char *oper);
@@ -274,11 +272,11 @@ void						check_null(t_word **word, char *oper);
 void						check_label_chars(char *line, int i, int j);
 
 /*
-** ==================== asm_get_f_arr.c =======================================
+** ==================== asm_get_f_arr.c
 */
 t_check_arg					*get_f_arr(int code);
 /*
-** ==================== asm_definition.c ======================================
+** ==================== asm_definition.c
 */
 void						word_is_space(char *line, int j, t_word *word);
 void						word_is_direct(char *line, int j, t_word *word);
@@ -295,20 +293,17 @@ void						word_is_command(char *line, int j, int i,
 void						word_is_instruction(char *line, int i, int j,
 							t_word *word);
 /*
-** ==================== asm_get_label_distance.c ==============================
+** ==================== asm_get_label_distance.c
 */
 int							get_label_distance(t_operation *oper,
 							t_instruction *instr, char *name);
 /*
-** ==================== asm_process_negative_arg_val.c ========================
+** ==================== asm_process_negative_arg_val.c
 */
 int							process_negative_val(__int128_t val, char arg_size);
 /*
-** ==================== asm_free.c ============================================
+** ==================== asm_free.c
 */
 void						f_free(void);
-/*
-** ============================================================================
-*/
 
 #endif
