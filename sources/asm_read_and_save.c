@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:57:01 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/08 15:26:48 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/08 16:24:31 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ static void		add_word(t_word *word, t_string *string)
 	string->last_word = word;
 }
 
-static char		is_end_of_word(char *line, char quote, int i)
+static char		is_end_of_word(char *line, int i)
 {
-	return (!quote && (line[i] == SEPARATOR_CHAR || line[i] == ' '
-		|| line[i] == '\t' || line[i] == '\n'));
+	return (line[i] == SEPARATOR_CHAR || line[i] == ' '
+		|| line[i] == '\t' || line[i] == '\n' || line[i] == '\"');
 }
 
 /*
@@ -59,24 +59,21 @@ static void		divide_string_into_words(char *line, t_string *string, int j)
 	int				i;
 
 	i = -1;
-	while (line[++i] /*&& line[i] != '\n'*/)
+	while (line[++i])
 	{
 		if ((line[i] == COMMENT_CHAR || line[i] == DEF_COMMENT_CHAR) && !quote)
 			break ;
-		if (line[i] == '\"')
+		if (is_end_of_word(line, i) && (!quote || line[i] == '\"'))
 		{
 			add_word(allocate_and_define(line, j, i - 1, quote), string);
-			quote = (quote == 0 ? 1 : 0);
+			if (line[i] != '\"')
+				add_word(allocate_and_define(line, i, i, quote), string);
+			else
+				quote = (quote == 0 ? 1 : 0);
 			j = i + 1;
 		}
-		else if (is_end_of_word(line, quote, i))
-		{
-			add_word(allocate_and_define(line, j, i - 1, quote), string);
-			add_word(allocate_and_define(line, i, i, quote), string);
-			if (line[i] == '\n')
-				return ;
-			j = i + 1;
-		}
+		if (!quote && line[i] == '\n')
+			return ;
 	}
 	add_word(allocate_and_define(line, j, i - 1, quote), string);
 	if (!quote && line[i] == '\0' && string->last_word)
@@ -114,6 +111,5 @@ t_string		*read_and_save(int ac, char **av)
 	else
 		error(ERR_READ);
 	g_input_l = 0;
-	// print_strings(string);
 	return (string);
 }
