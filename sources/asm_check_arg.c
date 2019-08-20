@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 14:31:39 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/06 16:05:50 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/20 12:53:59 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,9 @@ void	check_arg(t_word **word, t_check_arg *f, char *oper)
 			ok = 1;
 		f++;
 	}
-	if (!ok)
-	{
-		free(rem_f);
-		lex_error(ERR_WRONG_ARG_TYPE, oper);
-	}
 	free(rem_f);
+	if (!ok)
+		lex_error(ERR_WRONG_ARG_TYPE, oper);
 }
 
 /*
