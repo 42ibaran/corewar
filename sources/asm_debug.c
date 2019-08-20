@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 14:57:20 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/06 16:07:08 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/20 18:21:11 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,11 @@ void			print_all_instuctions(t_instruction *instr)
 		{
 			i = -1;
 			while (++i < oper->length)
-			{
-				printf("%.2x ", oper->binary[i]);
-			}
-			printf("\n");
+				ft_printf("%.2x ", oper->binary[i]);
+			ft_printf("\n");
 			oper = oper->next;
 		}
-		printf("\n");
+		ft_printf("\n");
 		instr = instr->next;
 	}
 }

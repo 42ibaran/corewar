@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 13:59:20 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/08 15:52:37 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/08/20 18:25:13 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int				process_negative_val(__int128_t val, char arg_size)
 	char	*bin_str;
 	char	*bin_str_16;
 
-	bin_str = ft_itoa_base(-val, 2);
+	if (!(bin_str = ft_itoa_base(-val, 2)))
+		error(ERR_MEMORY);
 	if ((int)ft_strlen(bin_str) > 8 * arg_size)
 	{
 		free(bin_str);
