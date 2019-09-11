@@ -6,7 +6,7 @@
 /*   By: ibaran <ibaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 19:42:11 by ibaran            #+#    #+#             */
-/*   Updated: 2019/08/08 14:52:34 by ibaran           ###   ########.fr       */
+/*   Updated: 2019/09/06 13:14:20 by ibaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 # include <string.h>
 # include <libc.h>
+# include "ft_printf.h"
 
 typedef struct		s_list
 {
@@ -113,7 +114,15 @@ char				*ft_strjoinfree(char *s1, char *s2, int n);
 void				ft_fillstr(char *str, char c, size_t n);
 __int128_t			ft_atoint128(const char *str);
 
+char				*ft_write_buff(char *line, int *i);
+char				*ft_lltoa_base(long long n, int base);
+char				*ft_un_lltoa_base(unsigned long long n, int base);
+char				*ft_strndupfree(const char *s, size_t n);
+
+int					ft_isnum(char *str);
+
 int					ft_printf(const char *format, ...);
+int					ft_dprintf(int fd, const char *format, ...);
 int					get_next_line(const int fd, char **line);
 
 #endif
